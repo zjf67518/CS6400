@@ -49,13 +49,5 @@ public class LoginController {
         log.info("当前方法是：{}","mainPage");
 
         return "main";
-
-    }
-
-    @GetMapping("/main.html")
-    public String main(HttpSession session,Model model){
-
-        return "main";
-
     }
 }

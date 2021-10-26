@@ -9,9 +9,4 @@
         select * from user_db where username = #{username}
     </select>
 
-    <!--    public void insert(City city);-->
-    <!--    <insert id="insert" useGeneratedKeys="true" keyProperty="id">-->
-    <!--        insert into  city(`name`,`state`,`country`) values(#{name},#{state},#{country})-->
-    <!--    </insert>-->
-
 </mapper>
