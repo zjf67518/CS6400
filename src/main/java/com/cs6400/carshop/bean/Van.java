@@ -9,6 +9,5 @@ import lombok.NoArgsConstructor;
 @Data
 public class Van {
     private String VIN;
-    private int cupholder_number;
-    private String drivetrain_type;
+    private int has_back_door;
 }
