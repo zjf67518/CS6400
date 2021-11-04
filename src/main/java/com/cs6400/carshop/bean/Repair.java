@@ -14,7 +14,7 @@ public class Repair {
     private String VIN;
     private String odometer_reading;
     private String complete_date;
-    private int customer_id;
+    private Integer customer_id;
     private String service_writer_user_name;
     private String description;
     private BigDecimal labor_charge;

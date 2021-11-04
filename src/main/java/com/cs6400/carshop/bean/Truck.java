@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class Truck {
     private String VIN;
-    private int cargo_capacity;
+    private Integer cargo_capacity;
     private String cover_type;
-    private int rear_axles_number;
+    private Integer rear_axles_number;
 }

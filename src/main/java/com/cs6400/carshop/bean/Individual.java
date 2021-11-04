@@ -11,5 +11,5 @@ public class Individual {
     private String driver_license;
     private String first_name;
     private String last_name;
-    private long customer_id;
+    private Long customer_id;
 }

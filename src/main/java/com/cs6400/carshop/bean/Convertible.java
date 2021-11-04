@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @Data
 public class Convertible {
     private String VIN;
-    private int seats_number;
+    private Integer seats_number;
     private String roof_type;
 }
