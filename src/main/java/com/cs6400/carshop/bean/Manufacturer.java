@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Manufacturer {
-    private long manufacturer_id;
+    private Long manufacturer_id;
     private String manufacturer_name;
 }

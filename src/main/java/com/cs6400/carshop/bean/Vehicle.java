@@ -11,12 +11,12 @@ import java.math.BigDecimal;
 @Data
 public class Vehicle {
     private String VIN;
-    private long manufacturer_id;
+    private Long manufacturer_id;
     private BigDecimal invoice_price;
     private String model_name;
-    private int model_year;
+    private Integer model_year;
     private String description;
     private String added_date;
     private String inventory_clerk_user_name;
-    private String vehicle_type;
+    private Integer vehicle_type;
 }

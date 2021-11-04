@@ -1,7 +1,7 @@
 package com.cs6400.carshop.controller;
 
 
-import com.cs6400.carshop.bean.User;
+import com.cs6400.carshop.bean.RegularUser;
 import com.cs6400.carshop.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +20,14 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    @GetMapping(value = {"/","/login"})
+    @GetMapping(value = {"/login"})
     public String loginPage(){
 
         return "login";
     }
 
     @PostMapping("/login")
-    public String main(User user, HttpSession session, Model model){
+    public String main(RegularUser user, HttpSession session, Model model){
 
         Map<String, Object> map = userService.login(user.getUserName(), user.getPassword());
 
@@ -49,5 +49,11 @@ public class LoginController {
         log.info("当前方法是：{}","mainPage");
 
         return "main";
+    }
+
+    @GetMapping(value = {"/","/search"})
+    public String searchPage(){
+
+        return "search";
     }
 }

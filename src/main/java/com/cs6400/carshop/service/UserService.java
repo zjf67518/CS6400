@@ -1,12 +1,11 @@
 package com.cs6400.carshop.service;
 
-import com.cs6400.carshop.bean.User;
+import com.cs6400.carshop.bean.RegularUser;
 import com.cs6400.carshop.mapper.UserMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +30,7 @@ public class UserService {
         }
 
         //验证账号
-        User user = userMapper.selectByUserName(username);
+        RegularUser user = userMapper.selectByUserName(username);
         if(user == null) {
             map.put("msg", "该账号不存在！");
             return map;

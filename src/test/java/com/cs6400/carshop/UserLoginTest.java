@@ -1,6 +1,6 @@
 package com.cs6400.carshop;
 
-import com.cs6400.carshop.bean.User;
+import com.cs6400.carshop.bean.RegularUser;
 import com.cs6400.carshop.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ public class UserLoginTest {
 
     @Test
     void findByUserName() {
-        User u = userMapper.selectByUserName("qzhu302");
+        RegularUser u = userMapper.selectByUserName("qzhu302");
         System.out.println(u.toString());
     }
 

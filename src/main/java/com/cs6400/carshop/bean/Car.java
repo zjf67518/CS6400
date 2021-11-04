@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @Data
 public class Car {
     private String VIN;
-    private int door_number;
+    private Integer door_number;
 }

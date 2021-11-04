@@ -15,5 +15,5 @@ public class Part {
     private String vendor_name;
     private String part_name;
     private BigDecimal unit_price;
-    private int quantity;
+    private Integer quantity;
 }
