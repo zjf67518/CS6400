@@ -54,8 +54,8 @@
             </if>
         </if>
         <if test="order != null and order != 'VIN'">
-            order by ${order}
-            <if test="descOrder == true">
+            order by ${orderby}
+            <if test="desc == true">
                 desc
             </if>
         </if>
