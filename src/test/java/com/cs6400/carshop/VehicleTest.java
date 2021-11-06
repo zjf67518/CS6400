@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,9 @@ public class VehicleTest {
     public void testForSearch(){
         SearchInfoConverter searchInfoConverter = new SearchInfoConverter();
         //searchInfoConverter.setVIN("Car1");
-        searchInfoConverter.setDescOrder(true);
+
+        searchInfoConverter.setPrice(BigDecimal.valueOf(20000));
+        searchInfoConverter.setPriceOrder(true);
         List<Vehicle> list = vehicleService.searchVehicleUsedByCustomer(searchInfoConverter);
         for(Vehicle vehicle : list){
             System.out.println(vehicle);

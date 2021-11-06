@@ -37,6 +37,14 @@
         <if test="color != null and color != ''">
             and VIN in (select VIN from color where color = #{color})
         </if>
+        <if test="price != null">
+            <if test="priceOrder == true">
+                and invoice_price >= #{price}
+            </if>
+            <if test="priceOrder == false">
+                and invoice_price >= #{price}
+            </if>
+        </if>
         <if test="manufacturer_name != null and manufacturer_name != ''">
             and manufacturer_id = (select manufacturer_id from manufacturer where manufacturer_name = #{manufacturer_name})
         </if>
