@@ -57,7 +57,7 @@
         </where>
         <if test="orderby == null or orderby == 'VIN'">
             order by VIN
-            <if test="descOrder == true">
+            <if test="desc == true">
                 desc
             </if>
         </if>
