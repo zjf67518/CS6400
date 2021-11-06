@@ -25,8 +25,9 @@
     </select>
 
     <select id="searchVehicleByAttribute" parameterType="com.cs6400.carshop.utils.converter.SearchInfoConverter" resultType="com.cs6400.carshop.bean.Vehicle">
-        select VIN, manufacturer_id, invoice_price, model_name, model_year, description, added_date, inventory_clerk_user_name,vehicle_type from vehicle
+        select VIN, manufacturer_id, invoice_price , model_name, model_year, description, added_date, inventory_clerk_user_name,vehicle_type from vehicle
         <where>
+            VIN not in (select VIN from transaction)
         <if test="keyword != null and keyword != ''">
             and VIN like '%#{keyword}%' or model_name like '%#{keyword}%' or description like '%#{keyword}%'
             or manufacturer_id = (select manufacturer_id from manufacturer where manufacturer_name = like '%#{keyword}%')
@@ -42,7 +43,7 @@
                 and invoice_price >= #{price}
             </if>
             <if test="priceOrder == false">
-                and invoice_price >= #{price}
+                and #{price} >= invoice_price
             </if>
         </if>
         <if test="manufacturer_name != null and manufacturer_name != ''">
@@ -76,5 +77,28 @@
 
     <select id="searchManufacturerName" parameterType="int" resultType="string">
         select manufacturer_name from Manufacturer where manufacturer_id = #{manufacturer_id}
+    </select>
+
+
+    <select id="searchVehicleDetailByVIN" parameterType="string" resultType="com.cs6400.carshop.bean.Vehicle">
+        select VIN, manufacturer_id, invoice_price, model_name, model_year, description, added_date, inventory_clerk_user_name,vehicle_type from vehicle
+        where VIN = #{VIN}
+    </select>
+
+
+    <select id="searchCarDetailByVIN" parameterType="string" resultType="com.cs6400.carshop.bean.Vehicle">
+        select door_number from Car where VIN = #{VIN}
+    </select>
+    <select id="searchConvertibleDetailByVIN" parameterType="string" resultType="com.cs6400.carshop.bean.Vehicle">
+        select seats_number, roof_type from Convertible where VIN = #{VIN}
+    </select>
+    <select id="searchSuvDetailByVIN" parameterType="string" resultType="com.cs6400.carshop.bean.Vehicle">
+        select cupholder_number, drivetrain_type from SUV where VIN = #{VIN}
+    </select>
+    <select id="searchVanDetailByVIN" parameterType="string" resultType="com.cs6400.carshop.bean.Vehicle">
+        select has_back_door from Van where VIN = #{VIN}
+    </select>
+    <select id="searchTruckDetailByVIN" parameterType="string" resultType="com.cs6400.carshop.bean.Vehicle">
+        select cargo_capacity, cover_type, rear_axles_number from Truck where VIN = #{VIN}
     </select>
 </mapper>

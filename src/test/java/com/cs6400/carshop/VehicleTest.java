@@ -24,12 +24,18 @@ public class VehicleTest {
     public void testForSearch(){
         SearchInfoConverter searchInfoConverter = new SearchInfoConverter();
         //searchInfoConverter.setVIN("Car1");
-        searchInfoConverter.setDesc(true);
+        searchInfoConverter.setVehicle_type(1);
         List<Vehicle> list = vehicleService.searchVehicleUsedByCustomer(searchInfoConverter);
         for(Vehicle vehicle : list){
             System.out.println(vehicle);
         }
 
 
+    }
+
+    @Test
+    public void testForDetail(){
+        Vehicle vehicle = vehicleService.searchVehicleDetail("Car1");
+        System.out.println(vehicle);
     }
 }
