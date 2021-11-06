@@ -8,4 +8,4 @@ spring:
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
   configuration:
-    map-underscore-to-camel-case: true
+    map-underscore-to-camel-case: false

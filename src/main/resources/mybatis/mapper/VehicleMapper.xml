@@ -4,9 +4,69 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cs6400.carshop.mapper.VehicleMapper">
 
+<!--    <sql id="selectFields">-->
+<!--        VIN, manufacturer_id, invoice_price, model_name, model_year, description, added_date, inventory_clerk_user_name,-->
+<!--        vehicle_type-->
+<!--    </sql>-->
+<!--    <resultMap id="getVehicleByAttribute" type="com.cs6400.carshop.bean.Vehicle">-->
+<!--        <result property="VIN" column="VIN"></result>-->
+<!--        <result property="manufacturer_id" column="manufacturer_id"></result>-->
+<!--        <result property="invoice_price" column="invoice_price"></result>-->
+<!--        <result property="model_name" column="model_name"></result>-->
+<!--        <result property="model_year" column="model_year"></result>-->
+<!--        <result property="description" column="description"></result>-->
+<!--        <result property="added_date" column="added_date"></result>-->
+<!--        <result property="inventory_clerk_user_name" column="inventory_clerk_user_name"></result>-->
+<!--        <result property="vehicle_type" column="vehicle_type"></result>-->
+<!--    </resultMap>-->
 
     <select id="selectCountVehicleForSale" resultType="int">
         select count(*) from vehicle where vin not in (select vin from transaction);
     </select>
 
+    <select id="searchVehicleByAttribute" parameterType="com.cs6400.carshop.utils.converter.SearchInfoConverter" resultType="com.cs6400.carshop.bean.Vehicle">
+        select VIN, manufacturer_id, invoice_price, model_name, model_year, description, added_date, inventory_clerk_user_name,vehicle_type from vehicle
+        <where>
+        <if test="keyword != null and keyword != ''">
+            and VIN like '%#{keyword}%' or model_name like '%#{keyword}%' or description like '%#{keyword}%'
+            or manufacturer_id = (select manufacturer_id from manufacturer where manufacturer_name = like '%#{keyword}%')
+        </if>
+        <if test="vehicle_type != null and vehicle_type != ''">
+            and vehicle_type=#{vehicle_type}
+        </if>
+        <if test="color != null and color != ''">
+            and VIN in (select VIN from color where color = #{color})
+        </if>
+        <if test="manufacturer_name != null and manufacturer_name != ''">
+            and manufacturer_id = (select manufacturer_id from manufacturer where manufacturer_name = #{manufacturer_name})
+        </if>
+        <if test="model_year != null and model_year != ''">
+            and model_year = #{model_year}
+        </if>
+        <if test="VIN != null and VIN != ''">
+            and VIN = #{VIN}
+        </if>
+        </where>
+        <if test="order == null or order == 'VIN'">
+            order by VIN
+            <if test="descOrder == true">
+                desc
+            </if>
+        </if>
+        <if test="order != null and order != 'VIN'">
+            order by ${order}
+            <if test="descOrder == true">
+                desc
+            </if>
+        </if>
+    </select>
+
+
+    <select id="searchColorByVIN" parameterType="string" resultType="string">
+        select color from Color where VIN = #{VIN}
+    </select>
+
+    <select id="searchManufacturerName" parameterType="int" resultType="string">
+        select manufacturer_name from Manufacturer where manufacturer_id = #{manufacturer_id}
+    </select>
 </mapper>
