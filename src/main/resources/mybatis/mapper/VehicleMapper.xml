@@ -37,6 +37,14 @@
         <if test="color != null and color != ''">
             and VIN in (select VIN from color where color = #{color})
         </if>
+        <if test="price != null">
+            <if test="priceOrder == true">
+                and invoice_price >= #{price}
+            </if>
+            <if test="priceOrder == false">
+                and invoice_price >= #{price}
+            </if>
+        </if>
         <if test="manufacturer_name != null and manufacturer_name != ''">
             and manufacturer_id = (select manufacturer_id from manufacturer where manufacturer_name = #{manufacturer_name})
         </if>
@@ -47,13 +55,13 @@
             and VIN = #{VIN}
         </if>
         </where>
-        <if test="order == null or order == 'VIN'">
+        <if test="orderby == null or orderby == 'VIN'">
             order by VIN
-            <if test="descOrder == true">
+            <if test="desc == true">
                 desc
             </if>
         </if>
-        <if test="order != null and order != 'VIN'">
+        <if test="orderby != null and orderby != 'VIN'">
             order by ${orderby}
             <if test="desc == true">
                 desc
