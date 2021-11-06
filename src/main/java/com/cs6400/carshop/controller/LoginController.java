@@ -3,6 +3,7 @@ package com.cs6400.carshop.controller;
 
 import com.cs6400.carshop.bean.RegularUser;
 import com.cs6400.carshop.service.UserService;
+import com.cs6400.carshop.service.VehicleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
@@ -19,6 +22,8 @@ public class LoginController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private VehicleService vehicleService;
 
     @GetMapping(value = {"/login"})
     public String loginPage(){
@@ -35,7 +40,7 @@ public class LoginController {
             //把登陆成功的用户保存起来
             session.setAttribute("loginUser",user);
             //登录成功重定向到main.html;  重定向防止表单重复提交
-            return "redirect:/main";
+            return "redirect:/search";
         } else {
             model.addAttribute("msg",map.get("msg"));
             //回到登录页面
@@ -43,17 +48,16 @@ public class LoginController {
         }
     }
 
-    @GetMapping("/main")
-    public String mainPage(HttpSession session,Model model){
-
-        log.info("当前方法是：{}","mainPage");
-
-        return "main";
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "redirect:/search";
     }
 
     @GetMapping(value = {"/","/search"})
-    public String searchPage(){
+    public String searchPage(Model model){
 
+        model.addAttribute("vehicleNumber",vehicleService.selectVehicleForSale());
         return "search";
     }
 }

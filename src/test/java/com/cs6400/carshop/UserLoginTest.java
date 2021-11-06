@@ -15,7 +15,7 @@ public class UserLoginTest {
 
     @Test
     void findByUserName() {
-        RegularUser u = userMapper.selectByUserName("qzhu302");
+        RegularUser u = userMapper.selectByUserName("salesman_1");
         System.out.println(u.toString());
     }
 
