@@ -24,7 +24,7 @@ public class VehicleTest {
     public void testForSearch(){
         SearchInfoConverter searchInfoConverter = new SearchInfoConverter();
         //searchInfoConverter.setVIN("Car1");
-        searchInfoConverter.setDescOrder(true);
+        searchInfoConverter.setDesc(true);
         List<Vehicle> list = vehicleService.searchVehicleUsedByCustomer(searchInfoConverter);
         for(Vehicle vehicle : list){
             System.out.println(vehicle);
