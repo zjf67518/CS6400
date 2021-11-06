@@ -12,15 +12,15 @@ public class VehicleService {
     @Autowired
     private VehicleMapper vehicleMapper;
 
-    public int selectVehicleForSale(){
+    public int selectVehicleForSale() {
         return vehicleMapper.selectCountVehicleForSale();
     }
 
-    public List<Vehicle>searchVehicleUsedByCustomer(SearchInfoConverter searchInfoConverter){
+    public List<Vehicle> searchVehicleUsedByCustomer(SearchInfoConverter searchInfoConverter) {
         List<Vehicle> list = vehicleMapper.searchVehicleByAttribute(searchInfoConverter);
         for(Vehicle vehicle : list){
             List<String> colors = vehicleMapper.searchColorByVIN(vehicle.getVIN());
-            StringBuilder sb =new StringBuilder();
+            StringBuilder sb = new StringBuilder();
             for(String color : colors){
                 sb.append(color).append(' ');
             }
