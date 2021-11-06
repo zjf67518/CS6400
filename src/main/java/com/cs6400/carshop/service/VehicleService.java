@@ -15,12 +15,13 @@ public class VehicleService {
     public int selectVehicleForSale(){
         return vehicleMapper.selectCountVehicleForSale();
     }
+
     public List<Vehicle>searchVehicleUsedByCustomer(SearchInfoConverter searchInfoConverter){
         List<Vehicle> list = vehicleMapper.searchVehicleByAttribute(searchInfoConverter);
-        for(Vehicle vehicle:list){
+        for(Vehicle vehicle : list){
             List<String> colors = vehicleMapper.searchColorByVIN(vehicle.getVIN());
             StringBuilder sb =new StringBuilder();
-            for(String color:colors){
+            for(String color : colors){
                 sb.append(color).append(' ');
             }
             vehicle.setColor(sb.toString());
