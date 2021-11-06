@@ -13,4 +13,13 @@ public interface VehicleMapper {
     List<Vehicle> searchVehicleByAttribute(SearchInfoConverter searchInfoConverter);
     List<String> searchColorByVIN(String VIN);
     String searchManufacturerName(Integer Manufacturer_id);
+
+
+    Vehicle searchVehicleDetailByVIN(String VIN);
+    Vehicle searchCarDetailByVIN(String VIN);
+    Vehicle searchConvertibleDetailByVIN(String VIN);
+    Vehicle searchSuvDetailByVIN(String VIN);
+    Vehicle searchVanDetailByVIN(String VIN);
+    Vehicle searchTruckDetailByVIN(String VIN);
+
 }
