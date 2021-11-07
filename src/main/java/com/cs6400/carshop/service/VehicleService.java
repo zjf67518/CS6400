@@ -3,12 +3,14 @@ package com.cs6400.carshop.service;
 import com.cs6400.carshop.bean.Vehicle;
 import com.cs6400.carshop.mapper.VehicleMapper;
 import com.cs6400.carshop.utils.converter.SearchInfoConverter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+@Slf4j
 @Service
 public class VehicleService {
     @Autowired
@@ -35,6 +37,10 @@ public class VehicleService {
         return list;
     }
     public Vehicle searchVehicleDetail(String VIN) {
+        log.info("vinnnnnnn", VIN);
+        if (VIN.isEmpty()) {
+            return null;
+        }
         Vehicle vehicle = vehicleMapper.searchVehicleDetailByVIN(VIN);
         List<String> colors = vehicleMapper.searchColorByVIN(vehicle.getVIN());
         StringBuilder sb =new StringBuilder();

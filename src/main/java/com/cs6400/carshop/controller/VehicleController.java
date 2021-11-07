@@ -6,6 +6,7 @@ import com.cs6400.carshop.utils.converter.SearchInfoConverter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -20,9 +21,9 @@ public class VehicleController {
     @Autowired
     private VehicleService vehicleService;
 
-    @ResponseBody
+//    @ResponseBody
     @PostMapping("/SaveSearchInfo")
-    public Map saveSearchInfo(SearchInfoConverter searchInfo){
+    public String saveSearchInfo(SearchInfoConverter searchInfo, Model model){
         if (searchInfo.getVehicle_type() != null && searchInfo.getVehicle_type() == 0) {
             searchInfo.setVehicle_type(null);
         }
@@ -43,10 +44,24 @@ public class VehicleController {
         }
 
         Map<String, Object> map = new HashMap<>();
-        log.info("searchInfo:{}", searchInfo.toString());
-        log.info("searchInfo:{}", searchInfo.equals(new SearchInfoConverter()));
         List<Vehicle> list = vehicleService.searchVehicleUsedByCustomer(searchInfo);
+        log.info("searchInfo:{}", searchInfo.getVIN());
+
+        Vehicle vehicle = vehicleService.searchVehicleDetail(searchInfo.getVIN());
+        if (vehicle != null) {
+            list.add(vehicle);
+        }
+
+        log.info("searchInfo:{}", list);
+
+        if (list.isEmpty()) {
+//            map.put("msg", "Sorry, it looks like we don’t have that in stock!");
+            model.addAttribute("msg", "Sorry, it looks like we don’t have that in stock!");
+            return "dynamic_table";
+//            return map;
+        }
+        model.addAttribute("vehicles", list);
         map.put("res", list);
-        return map;
+        return "dynamic_table";
     }
 }
