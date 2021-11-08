@@ -28,8 +28,8 @@
         select VIN, manufacturer_id, invoice_price, model_name, model_year, description, added_date, inventory_clerk_user_name,vehicle_type from vehicle
         <where>
         <if test="keyword != null and keyword != ''">
-            and VIN like '%#{keyword}%' or model_name like '%#{keyword}%' or description like '%#{keyword}%'
-            or manufacturer_id = (select manufacturer_id from manufacturer where manufacturer_name = like '%#{keyword}%')
+            and VIN like '%${keyword}%' or model_name like '%${keyword}%' or description like '%${keyword}%'
+            or manufacturer_id = (select manufacturer_id from manufacturer where manufacturer_name  like '%${keyword}%')
         </if>
         <if test="vehicle_type != null and vehicle_type != ''">
             and vehicle_type=#{vehicle_type}
