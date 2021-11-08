@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -47,12 +48,6 @@ public class VehicleController {
         List<Vehicle> list = vehicleService.searchVehicleUsedByCustomer(searchInfo);
         log.info("searchInfo:{}", searchInfo.getVIN());
 
-        Vehicle vehicle = vehicleService.searchVehicleDetail(searchInfo.getVIN());
-        if (vehicle != null) {
-            list.add(vehicle);
-        }
-
-        log.info("searchInfo:{}", list);
 
         if (list.isEmpty()) {
 //            map.put("msg", "Sorry, it looks like we don’t have that in stock!");

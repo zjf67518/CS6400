@@ -23,8 +23,8 @@ public class VehicleTest {
     @Test
     public void testForSearch(){
         SearchInfoConverter searchInfoConverter = new SearchInfoConverter();
-        //searchInfoConverter.setVIN("Car1");
-        searchInfoConverter.setVehicle_type(1);
+        searchInfoConverter.setKeyword("Car1");
+//        searchInfoConverter.setVehicle_type(1);
         List<Vehicle> list = vehicleService.searchVehicleUsedByCustomer(searchInfoConverter);
         for(Vehicle vehicle : list){
             System.out.println(vehicle);

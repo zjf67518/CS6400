@@ -7,7 +7,7 @@
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="#" type="image/png">
 
-    <title>Dynamic Table</title>
+    <title>Vehicle message</title>
 
     <!--dynamic table-->
     <link th:href="@{/js/advanced-datatable/css/demo_page.css}" rel="stylesheet"/>
@@ -30,17 +30,8 @@
         <!-- page heading start-->
         <div class="page-heading">
             <h3>
-                Dynamic Table
+                Vehicle message
             </h3>
-            <ul class="breadcrumb">
-                <li>
-                    <a href="#">Dashboard</a>
-                </li>
-                <li>
-                    <a href="#">Data Tables</a>
-                </li>
-                <li class="active"> Dynamic Table</li>
-            </ul>
         </div>
         <!-- page heading end-->
 
@@ -50,7 +41,6 @@
                 <div class="col-sm-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            Dynamic Table
                             <span class="tools pull-right">
                 <a href="javascript:;" class="fa fa-chevron-down"></a>
                 <a href="javascript:;" class="fa fa-times"></a>
@@ -60,13 +50,6 @@
                             <div class="adv-table">
                                 <table class="display table table-bordered table-striped" id="dynamic-table">
                                     <thead>
-<!--                                    <tr>-->
-<!--                                        <th>#</th>-->
-<!--                                        <th>name</th>-->
-<!--                                        <th>age</th>-->
-<!--                                        <th>email</th>-->
-<!--                                        <th>操作</th>-->
-<!--                                    </tr>-->
                                     <tr>
                                         <th>VIN</th>
                                         <th>Vehicle type</th>
@@ -102,17 +85,10 @@
                     </section>
                 </div>
             </div>
-
-            <!--body wrapper end-->
-
-            <!--footer section start-->
-            <footer>
-                2020 &copy; AdminEx by ThemeBucket </a>
-            </footer>
-            <!--footer section end-->
-
-
         </div>
+        <form action="/search" method="get">
+            <input type="submit" value="return"/>
+        </form>
         <!-- main content end-->
 </section>
 

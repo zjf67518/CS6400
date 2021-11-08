@@ -19,6 +19,7 @@ public class VehicleService {
     public int selectVehicleForSale(){
         return vehicleMapper.selectCountVehicleForSale();
     }
+
     public List<Vehicle> searchVehicleUsedByCustomer(SearchInfoConverter searchInfoConverter){
         if (searchInfoConverter.getPrice() != null){
             searchInfoConverter.setPrice(searchInfoConverter.getPrice().divide(BigDecimal.valueOf(1.25)));
@@ -36,9 +37,9 @@ public class VehicleService {
         }
         return list;
     }
+
     public Vehicle searchVehicleDetail(String VIN) {
-        log.info("vinnnnnnn", VIN);
-        if (VIN.isEmpty()) {
+        if (VIN == null) {
             return null;
         }
         Vehicle vehicle = vehicleMapper.searchVehicleDetailByVIN(VIN);

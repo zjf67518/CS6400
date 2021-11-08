@@ -12,12 +12,14 @@
         </form>
     </li>
     <li th:if="${session.loginUser!=null}">
+        welcome!
+        <h5 th:text="${session.loginUser.UserName}">user</h5>
         <form action="/logout" method="get">
         <input value="logout" type="submit"/>
         </form>
     </li>
-    vehicleNumber
-    <h1 th:text="${vehicleNumber}">vehicleNumber</h1>
+    Available vehicles
+    <h5 th:text="${vehicleNumber}">vehicleNumber</h5>
 </div>
 <div id="content" style="height:2000px;width:4000px;">
     <form action="/SaveSearchInfo" method="post">

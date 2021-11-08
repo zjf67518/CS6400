@@ -25,9 +25,8 @@
     </select>
 
     <select id="searchVehicleByAttribute" parameterType="com.cs6400.carshop.utils.converter.SearchInfoConverter" resultType="com.cs6400.carshop.bean.Vehicle">
-        select VIN, manufacturer_id, invoice_price , model_name, model_year, description, added_date, inventory_clerk_user_name,vehicle_type from vehicle
+        select VIN, manufacturer_id, invoice_price, model_name, model_year, description, added_date, inventory_clerk_user_name,vehicle_type from vehicle
         <where>
-            VIN not in (select VIN from transaction)
         <if test="keyword != null and keyword != ''">
             and VIN like '%#{keyword}%' or model_name like '%#{keyword}%' or description like '%#{keyword}%'
             or manufacturer_id = (select manufacturer_id from manufacturer where manufacturer_name = like '%#{keyword}%')
