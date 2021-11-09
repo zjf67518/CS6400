@@ -63,7 +63,9 @@
                                     <tbody>
 
                                         <tr class="gradeX" th:each="vehicle: ${vehicles}">
-                                            <td th:text="${vehicle.VIN}"></td>
+                                            <td>
+                                                <a th:href="@{|/VehicleDetail/${vehicle.VIN}|}" th:text="${vehicle.VIN}"></a>
+                                            </td>
                                             <td th:text="${vehicle.vehicle_type}"></td>
                                             <td th:text="${vehicle.model_year}"></td>
                                             <td th:text="${vehicle.manufacturer_name}"></td>
