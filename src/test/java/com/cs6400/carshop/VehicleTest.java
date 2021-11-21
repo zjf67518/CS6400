@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,11 +40,20 @@ public class VehicleTest {
         System.out.println(vehicle);
     }
 
-//    @Test
-//    public void testForInsertVehicle(){
-//        Vehicle vehicle = new Vehicle();
-//        vehicle.setVIN("SUV2");
-//
-//
-//    }
+    @Test
+    public void testForInsertVehicle(){
+        Vehicle vehicle = new Vehicle();
+        vehicle.setVIN("SUV2");
+        vehicle.setManufacturer_id(1);
+        vehicle.setModel_name("model3");
+        vehicle.setModel_year(1995);
+        vehicle.setInvoice_price(BigDecimal.valueOf(199999));
+        vehicle.setInventory_clerk_user_name("InventoryClerk1");
+        vehicle.setVehicle_type(5);
+        vehicle.setCupholder_number(2);
+        vehicle.setDrivetrain_type("suv_type_2");
+        vehicleService.addVehicle(vehicle);
+
+
+    }
 }
