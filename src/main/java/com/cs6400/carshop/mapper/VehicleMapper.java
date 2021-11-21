@@ -22,4 +22,10 @@ public interface VehicleMapper {
     Vehicle searchVanDetailByVIN(String VIN);
     Vehicle searchTruckDetailByVIN(String VIN);
 
+    int insertVehicle(Vehicle vehicle);
+    int insertCar(Vehicle vehicle);
+    int insertConvertible(Vehicle vehicle);
+    int insertSUV(Vehicle vehicle);
+    int insertVan(Vehicle vehicle);
+    int insertTruck(Vehicle vehicle);
 }

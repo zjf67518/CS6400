@@ -101,4 +101,26 @@
     <select id="searchTruckDetailByVIN" parameterType="string" resultType="com.cs6400.carshop.bean.Vehicle">
         select cargo_capacity, cover_type, rear_axles_number from Truck where VIN = #{VIN}
     </select>
+
+    <insert id="insertVehicle" parameterType="com.cs6400.carshop.bean.Vehicle" >
+        insert into vehicle (VIN, manufacturer_id, invoice_price, model_name, model_year, description, added_date, inventory_clerk_user_name,
+vehicle_type) values(#{VIN}, #{manufacturer_id}, #{invoice_price}, #{model_name}, #{model_year}, #{description}, now(), #{inventory_clerk_user_name},
+                     #{vehicle_type})
+    </insert>
+    <insert id="insertConvertible" parameterType="com.cs6400.carshop.bean.Vehicle" >
+        insert into Convertible (VIN, seats_number, roof_type) values(#{VIN}, #{seats_number}, #{roof_type})
+    </insert>
+    <insert id="insertTruck" parameterType="com.cs6400.carshop.bean.Vehicle" >
+        insert into Truck (VIN, cargo_capacity, cover_type, rear_axles_number) values(#{VIN}, #{cargo_capacity}, #{cover_type}, #{rear_axles_number})
+    </insert>
+    <insert id="insertVan" parameterType="com.cs6400.carshop.bean.Vehicle" >
+        insert into Van (VIN, has_back_door) values(#{VIN}, #{has_back_door})
+    </insert>
+    <insert id="insertSUV" parameterType="com.cs6400.carshop.bean.Vehicle" >
+        insert into SUV (VIN, cupholder_number, drivetrain_type) values(#{VIN}, #{cupholder_number}, #{drivetrain_type})
+    </insert>
+    <insert id="insertCar" parameterType="com.cs6400.carshop.bean.Vehicle" >
+        insert into Car (VIN, door_number) values(#{VIN}, #{door_number})
+    </insert>
+
 </mapper>

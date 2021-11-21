@@ -38,4 +38,12 @@ public class VehicleTest {
         Vehicle vehicle = vehicleService.searchVehicleDetail("Car1");
         System.out.println(vehicle);
     }
+
+//    @Test
+//    public void testForInsertVehicle(){
+//        Vehicle vehicle = new Vehicle();
+//        vehicle.setVIN("SUV2");
+//
+//
+//    }
 }

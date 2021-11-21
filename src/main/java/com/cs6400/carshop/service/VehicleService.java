@@ -72,4 +72,25 @@ public class VehicleService {
         }
         return vehicle;
     }
+    public void addVehicle(Vehicle vehicle){
+
+        vehicleMapper.insertVehicle(vehicle);
+        switch(vehicle.getVehicle_type()){
+            case 1:
+                vehicleMapper.insertCar(vehicle);
+                break;
+            case 2:
+                vehicleMapper.insertConvertible(vehicle);
+                break;
+            case 3:
+                vehicleMapper.insertTruck(vehicle);
+                break;
+            case 4:
+                vehicleMapper.insertVan(vehicle);
+                break;
+            case 5:
+                vehicleMapper.insertSUV(vehicle);
+                break;
+        }
+    }
 }

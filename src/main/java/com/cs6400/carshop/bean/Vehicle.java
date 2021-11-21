@@ -20,7 +20,7 @@ public class Vehicle {
     private Date added_date;
     private String inventory_clerk_user_name;
     private Integer vehicle_type;
-
+    private String vehicle_name;
     private String manufacturer_name;
     private String color;
     //Car

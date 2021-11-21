@@ -43,4 +43,8 @@ public class UserService {
         map.put("user", user);
         return map;
     }
+
+    public String searchUserType(){
+
+    }
 }
