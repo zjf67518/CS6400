@@ -2,6 +2,7 @@ package com.cs6400.carshop.service;
 
 import com.cs6400.carshop.bean.Vehicle;
 import com.cs6400.carshop.mapper.VehicleMapper;
+import com.cs6400.carshop.utils.Enum.VehicleType;
 import com.cs6400.carshop.utils.converter.SearchInfoConverter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,7 @@ public class VehicleService {
             vehicle.setColor(sb.toString());
             vehicle.setManufacturer_name(vehicleMapper.searchManufacturerName(vehicle.getManufacturer_id()));
             vehicle.setInvoice_price(vehicle.getInvoice_price().multiply(BigDecimal.valueOf(1.25)));
+            vehicle.setVehicle_name(VehicleType.TransferTypeToName(vehicle.getVehicle_type()));
         }
         return list;
     }
@@ -51,6 +53,7 @@ public class VehicleService {
         vehicle.setColor(sb.toString());
         vehicle.setInvoice_price(vehicle.getInvoice_price().multiply(BigDecimal.valueOf(1.25)));
         vehicle.setManufacturer_name(vehicleMapper.searchManufacturerName(vehicle.getManufacturer_id()));
+        vehicle.setVehicle_name(VehicleType.TransferTypeToName(vehicle.getVehicle_type()));
         switch (vehicle.getVehicle_type()){
             case 1:
                 Vehicle car = vehicleMapper.searchCarDetailByVIN(vehicle.getVIN());
