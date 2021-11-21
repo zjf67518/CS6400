@@ -4,6 +4,7 @@ package com.cs6400.carshop.controller;
 import com.cs6400.carshop.bean.RegularUser;
 import com.cs6400.carshop.service.UserService;
 import com.cs6400.carshop.service.VehicleService;
+import com.cs6400.carshop.utils.Enum.PrivilegedUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -5,8 +5,12 @@ public enum VehicleType {
 
     private int type;
 
-    private VehicleType(int type) {
+    public int getType() {
+        return type;
+    }
 
+    VehicleType(int type) {
+        this.type = type;
     }
 
     public static String TransferTypeToName(int type) {
