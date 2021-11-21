@@ -105,7 +105,7 @@ public class VehicleService {
         }
         String Vin = vehicle.getVIN();
 
-        String[] colors = vehicle.getColor().split(" ");
+        String[] colors = vehicle.getColor().split(",");
         for (String color : colors) {
             vehicleMapper.insertColor(Vin, color);
         }
