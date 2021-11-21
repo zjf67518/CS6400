@@ -121,5 +121,7 @@ vehicle_type) values(#{VIN}, #{manufacturer_id}, #{invoice_price}, #{model_name}
     <insert id="insertCar" parameterType="com.cs6400.carshop.bean.Vehicle" >
         insert into Car (VIN, door_number) values(#{VIN}, #{door_number})
     </insert>
-
+    <insert id="insertColor" parameterType="String" >
+        insert into Color (VIN, color) values(#{VIN}, #{color})
+    </insert>
 </mapper>

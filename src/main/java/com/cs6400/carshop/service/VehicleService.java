@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -101,6 +102,12 @@ public class VehicleService {
             case 5:
                 vehicleMapper.insertSUV(vehicle);
                 break;
+        }
+        String Vin = vehicle.getVIN();
+
+        String[] colors = vehicle.getColor().split(" ");
+        for (String color : colors) {
+            vehicleMapper.insertColor(Vin, color);
         }
     }
 }

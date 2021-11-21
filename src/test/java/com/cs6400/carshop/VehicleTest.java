@@ -52,6 +52,7 @@ public class VehicleTest {
         vehicle.setVehicle_type(5);
         vehicle.setCupholder_number(2);
         vehicle.setDrivetrain_type("suv_type_2");
+        vehicle.setColor("white red blue");
         vehicleService.addVehicle(vehicle);
 
 

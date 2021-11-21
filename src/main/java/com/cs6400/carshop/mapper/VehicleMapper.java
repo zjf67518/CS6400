@@ -28,4 +28,6 @@ public interface VehicleMapper {
     int insertSUV(Vehicle vehicle);
     int insertVan(Vehicle vehicle);
     int insertTruck(Vehicle vehicle);
+
+    int insertColor(String VIN, String color);
 }
