@@ -7,4 +7,10 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserMapper {
     RegularUser selectByUserName(String username);
+    String selectOwner(String username);
+    String selectInventoryClerk(String username);
+    String selectSalePerson(String username);
+    String selectServiceWriter(String username);
+    String selectManager(String username);
+
 }
