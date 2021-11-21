@@ -43,4 +43,23 @@ public class UserService {
         map.put("user", user);
         return map;
     }
+
+    public String searchUserType(String username){
+        if(userMapper.selectOwner(username) != null){
+            return "Owner";
+        }
+        if(userMapper.selectInventoryClerk(username) != null){
+            return "InventoryClerk";
+        }
+        if(userMapper.selectSalePerson(username) != null){
+            return "SalePerson";
+        }
+        if(userMapper.selectServiceWriter(username) != null){
+            return "ServiceWriter";
+        }
+        if(userMapper.selectManager(username) != null){
+            return "Manager";
+        }
+        return null;
+    }
 }
