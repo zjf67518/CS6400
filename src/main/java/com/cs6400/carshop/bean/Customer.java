@@ -12,4 +12,17 @@ public class Customer {
     private String phone_number;
     private String email;
     private String address;
+
+    //Individual
+    private String driver_license;
+    private String first_name;
+    private String last_name;
+
+    //Business
+    private String tax_id;
+    private String business_name;
+    private String contact;
+    private String title;
+
+
 }
