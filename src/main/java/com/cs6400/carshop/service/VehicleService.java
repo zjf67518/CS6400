@@ -2,13 +2,16 @@ package com.cs6400.carshop.service;
 
 import com.cs6400.carshop.bean.Vehicle;
 import com.cs6400.carshop.mapper.VehicleMapper;
+import com.cs6400.carshop.utils.Enum.VehicleType;
 import com.cs6400.carshop.utils.converter.SearchInfoConverter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+@Slf4j
 @Service
 public class VehicleService {
     @Autowired
@@ -17,6 +20,7 @@ public class VehicleService {
     public int selectVehicleForSale(){
         return vehicleMapper.selectCountVehicleForSale();
     }
+
     public List<Vehicle> searchVehicleUsedByCustomer(SearchInfoConverter searchInfoConverter){
         if (searchInfoConverter.getPrice() != null){
             searchInfoConverter.setPrice(searchInfoConverter.getPrice().divide(BigDecimal.valueOf(1.25)));
@@ -31,10 +35,15 @@ public class VehicleService {
             vehicle.setColor(sb.toString());
             vehicle.setManufacturer_name(vehicleMapper.searchManufacturerName(vehicle.getManufacturer_id()));
             vehicle.setInvoice_price(vehicle.getInvoice_price().multiply(BigDecimal.valueOf(1.25)));
+            vehicle.setVehicle_name(VehicleType.TransferTypeToName(vehicle.getVehicle_type()));
         }
         return list;
     }
+
     public Vehicle searchVehicleDetail(String VIN) {
+        if (VIN == null) {
+            return null;
+        }
         Vehicle vehicle = vehicleMapper.searchVehicleDetailByVIN(VIN);
         List<String> colors = vehicleMapper.searchColorByVIN(vehicle.getVIN());
         StringBuilder sb =new StringBuilder();
@@ -44,6 +53,7 @@ public class VehicleService {
         vehicle.setColor(sb.toString());
         vehicle.setInvoice_price(vehicle.getInvoice_price().multiply(BigDecimal.valueOf(1.25)));
         vehicle.setManufacturer_name(vehicleMapper.searchManufacturerName(vehicle.getManufacturer_id()));
+        vehicle.setVehicle_name(VehicleType.TransferTypeToName(vehicle.getVehicle_type()));
         switch (vehicle.getVehicle_type()){
             case 1:
                 Vehicle car = vehicleMapper.searchCarDetailByVIN(vehicle.getVIN());

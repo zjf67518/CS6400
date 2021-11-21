@@ -12,12 +12,14 @@
         </form>
     </li>
     <li th:if="${session.loginUser!=null}">
+        welcome!
+        <h5 th:text="${session.loginUser.UserName}">user</h5>
         <form action="/logout" method="get">
         <input value="logout" type="submit"/>
         </form>
     </li>
-    vehicleNumber
-    <h1 th:text="${vehicleNumber}">vehicleNumber</h1>
+    Available vehicles
+    <h5 th:text="${vehicleNumber}">vehicleNumber</h5>
 </div>
 <div id="content" style="height:2000px;width:4000px;">
     <form action="/SaveSearchInfo" method="post">
@@ -28,6 +30,7 @@
         <input type="radio" name="priceOrder" value="True">more
         <input type="radio" name="priceOrder" value="False">less<br/>
         color： <select name="color">
+            <option>null</option>
             <option value="Aluminum">Aluminum</option>
             <option value="Beige">Beige</option>
             <option value="Black">Black</option>
@@ -56,13 +59,15 @@
             <option value="Yellow">Yellow</option>
         </select><br/>
         Vehile_type： <select name="Vehicle_type">
-            <option value="Car">car</option>
-            <option value="Convertible">Convertible</option>
-            <option value="Truck">Truck</option>
-            <option value="Van">Van</option>
-            <option value="SUV">SUV</option>
+            <option value=0>null</option>
+            <option value=1>car</option>
+            <option value=2>Convertible</option>
+            <option value=3>Truck</option>
+            <option value=4>Van</option>
+            <option value=5>SUV</option>
         </select><br/>
         manufacturer_name： <select name="manufacturer_name">
+            <option>null</option>
             <option value="Acura">Acura</option>
             <option value="Alfa Romeo">Alfa Romeo</option>
             <option value="Aston Martin">Aston Martin</option>
@@ -113,10 +118,11 @@
         model_year： <input name="model_year"/> <br/>
         keyword： <input name="keyword"/> <br/>
         orderby： <select name="orderby">
-            <option value="modelyear">modelyear</option>
-            <option value="invoiceprice">invoiceprice</option>
+            <option>null</option>
+            <option value="model_year">modelyear</option>
+            <option value="invoice_price">invoiceprice</option>
             <option value="VIN">VIN</option>
-            <option value="manufacturer">manufacturer</option>
+            <option value="manufacturer_id">manufacturer</option>
         </select>
         <input type="radio" name="desc" value="True">desc
         <input type="radio" name="desc" value="False">asc<br/>
@@ -124,6 +130,7 @@
     </form>
 </div>
 <hr/>
+
 
 </body>
 </html>

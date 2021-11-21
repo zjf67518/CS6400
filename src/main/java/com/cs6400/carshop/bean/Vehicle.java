@@ -38,29 +38,4 @@ public class Vehicle {
     private String cover_type;
     private Integer rear_axles_number;
 
-    @Override
-    public String toString() {
-        return "Vehicle{" +
-                "VIN='" + VIN + '\'' +
-                ", manufacturer_id=" + manufacturer_id +
-                ", invoice_price=" + invoice_price +
-                ", model_name='" + model_name + '\'' +
-                ", model_year=" + model_year +
-                ", description='" + description + '\'' +
-                ", added_date=" + added_date +
-                ", inventory_clerk_user_name='" + inventory_clerk_user_name + '\'' +
-                ", vehicle_type=" + vehicle_type +
-                ", manufacturer_name='" + manufacturer_name + '\'' +
-                ", color='" + color + '\'' +
-                ", door_number=" + door_number +
-                ", seats_number=" + seats_number +
-                ", roof_type='" + roof_type + '\'' +
-                ", cupholder_number=" + cupholder_number +
-                ", drivetrain_type='" + drivetrain_type + '\'' +
-                ", has_back_door=" + has_back_door +
-                ", cargo_capacity=" + cargo_capacity +
-                ", cover_type='" + cover_type + '\'' +
-                ", rear_axles_number=" + rear_axles_number +
-                '}';
-    }
 }

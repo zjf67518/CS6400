@@ -9,4 +9,21 @@ public enum VehicleType {
 
     }
 
+    public static String TransferTypeToName(int type) {
+        switch (type) {
+            case 1:
+                return "Car";
+            case 2:
+                return "Convertible";
+            case 3:
+                return "Truck";
+            case 4:
+                return "Van";
+            case 5:
+                return "SUV";
+            default:
+                return "null";
+        }
+    }
+
 }
