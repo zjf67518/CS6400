@@ -21,7 +21,6 @@ public class VehicleController {
     @Autowired
     private VehicleService vehicleService;
 
-//    @ResponseBody
     @PostMapping("/SaveSearchInfo")
     public String saveSearchInfo(SearchInfoConverter searchInfo, Model model){
         if (searchInfo.getVehicle_type() != null && searchInfo.getVehicle_type() == 0) {
@@ -49,10 +48,8 @@ public class VehicleController {
 
 
         if (list.isEmpty()) {
-//            map.put("msg", "Sorry, it looks like we don’t have that in stock!");
             model.addAttribute("msg", "Sorry, it looks like we don’t have that in stock!");
             return "dynamic_table";
-//            return map;
         }
         model.addAttribute("vehicles", list);
         map.put("res", list);
@@ -61,10 +58,21 @@ public class VehicleController {
 
     @GetMapping("/VehicleDetail/{VIN}")
     public String deleteUser(@PathVariable("VIN") String VIN, Model model){
-
         Vehicle vehicle = vehicleService.searchVehicleDetail(VIN);
         Map<String,Object> map = new HashMap<>();
         model.addAttribute("vehicle", vehicle);
         return "vehicle_detail";
     }
+
+    @GetMapping(value = {"/addVehicle"})
+    public String addVehicle(){
+        return "addVehicle";
+    }
+
+    @PostMapping("/SaveVehicleInfo")
+    public String saveVehicleInfo(Vehicle vehicle, Model model){
+        log.info(vehicle.toString());
+        return "/VehicleDetail/" + vehicle.getVIN();
+    }
+
 }

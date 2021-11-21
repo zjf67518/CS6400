@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>addVehicle</title>
+</head>
+<body>
+<div id="content" style="height:2000px;width:4000px;">
+    <form action="/SaveVehicleInfo" method="post">
+        VIN： <input name="VIN"/> <br/>
+        invoice_price： <input name="invoice_price"/> <br/>
+        model_name： <input name="model_name"/> <br/>
+        model_year： <input name="model_year"/> <br/>
+        description: <input name="description"/> <br/>
+        color： <select name="color" multiple="multiple">
+        <option>null</option>
+        <option value="Aluminum">Aluminum</option>
+        <option value="Beige">Beige</option>
+        <option value="Black">Black</option>
+        <option value="Blue">Blue</option>
+        <option value="Brown">Brown</option>
+        <option value="Bronze">Bronze</option>
+        <option value="Claret">Claret</option>
+        <option value="Copper">Copper</option>
+        <option value="Cream">Cream</option>
+        <option value="Gold">Gold</option>
+        <option value="Gray">Gray</option>
+        <option value="Green">Green</option>
+        <option value="Maroon">Maroon</option>
+        <option value="Metallic">Metallic</option>
+        <option value="Navy">Navy</option>
+        <option value="Orange">Orange</option>
+        <option value="Pink">Pink</option>
+        <option value="Purple">Purple</option>
+        <option value="Red">Red</option>
+        <option value="Rose">Rose</option>
+        <option value="Navy">Navy</option>
+        <option value="Silver">Silver</option>
+        <option value="Tan">Tan</option>
+        <option value="Turquoise">Turquoise</option>
+        <option value="White">White</option>
+        <option value="Yellow">Yellow</option>
+    </select><br/>
+        Vehile_type： <select name="Vehicle_type">
+        <option value=0>null</option>
+        <option value=1>car</option>
+        <option value=2>Convertible</option>
+        <option value=3>Truck</option>
+        <option value=4>Van</option>
+        <option value=5>SUV</option>
+    </select><br/>
+        manufacturer_id： <select name="manufacturer_id">
+        <option>null</option>
+        <option value=1>Acura</option>
+        <option value=2>Alfa Romeo</option>
+        <option value=3>Aston Martin</option>
+        <option value=4>Audi</option>
+        <option value=5>Bentley</option>
+        <option value=6>BMW</option>
+        <option value=7>Buick</option>
+        <option value=8>Cadillac</option>
+        <option value=9>Chevrolet</option>
+        <option value=10>Chrysler</option>
+        <option value=11>Dodge</option>
+        <option value=12>Ferrari</option>
+        <option value=13>FIAT</option>
+        <option value=14>Ford</option>
+        <option value=15>Freightliner</option>
+        <option value=16>Genesis</option>
+        <option value=17>GMC</option>
+        <option value=18>Honda</option>
+        <option value=19>Hyundai</option>
+        <option value=20>INFINITI</option>
+        <option value=21>Jaguar</option>
+        <option value=22>Jeep</option>
+        <option value=23>Kia</option>
+        <option value=24>Lamborghini</option>
+        <option value=25>Land Rover</option>
+        <option value=26>Lexus</option>
+        <option value=27>Lincoln</option>
+        <option value=28>Lotus</option>
+        <option value=29>Maserati</option>
+        <option value=30>MAZDA</option>
+        <option value=31>McLaren</option>
+        <option value=32>Mercedes-Benz</option>
+        <option value=33>MINI</option>
+        <option value=34>Mitsubishi</option>
+        <option value=35>Nissan</option>
+        <option value=36>Porsche</option>
+        <option value=37>Ram</option>
+        <option value=38>Rolls-Royce</option>
+        <option value=39>SAAB</option>
+        <option value=40>smart</option>
+        <option value=41>Subaru</option>
+        <option value=42>Tesla</option>
+        <option value=43>Toyota</option>
+        <option value=44>Vauxhall</option>
+        <option value=45>Volkswagen</option>
+        <option value=46>Volvo</option>
+    </select><br/>
+        <input type="submit" value="add"/>
+    </form>
+</div>
+</body>
+</html>

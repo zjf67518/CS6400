@@ -11,19 +11,19 @@
 
 
     <select id="selectOwner" resultType="String">
-        select username from Owner where user_name = #{username}
+        select user_name from Owner where user_name = #{username}
     </select>
     <select id="selectSalePerson" resultType="String">
-        select username from saleperson where user_name = #{username}
+        select user_name from saleperson where user_name = #{username}
     </select>
     <select id="selectInventoryClerk" resultType="String">
-        select username from inventoryclerk where user_name = #{username}
+        select user_name from inventoryclerk where user_name = #{username}
     </select>
     <select id="selectServiceWriter" resultType="String">
-        select username from servicewriter where user_name = #{username}
+        select user_name from servicewriter where user_name = #{username}
     </select>
     <select id="selectManager" resultType="String">
-        select username from manager where user_name = #{username}
+        select user_name from manager where user_name = #{username}
     </select>
 
 

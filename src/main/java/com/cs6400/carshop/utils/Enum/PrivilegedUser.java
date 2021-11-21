@@ -15,15 +15,15 @@ public enum PrivilegedUser {
 
     public static PrivilegedUser TransferPrivilegedUser(String Authority) {
         switch (Authority) {
-            case "inventory_clerk":
+            case "InventoryClerk":
                 return inventory_clerk;
-            case "sales_person":
+            case "SalePerson":
                 return sales_person;
-            case "service_writer":
+            case "ServiceWriter":
                 return service_writer;
-            case "manager":
+            case "Manager":
                 return manager;
-            case "owner":
+            case "Owner":
                 return owner;
             default:
                 return null;
