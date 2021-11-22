@@ -122,11 +122,14 @@ public class VehicleController {
             return "wrongInfo";
         }
 
-        boolean availableRepair = repairService.availableForRepair(VIN);
-        log.info("{}", availableRepair);
-        if (availableRepair && !flag) {
+        Repair repair = repairService.availableForRepair(VIN);
+        log.info("{}", repair);
+        if (repair == null && !flag) {
             return "addRepair";
-        } else if (!availableRepair && !flag) {
+        } else if (repair == null) {
+            model.addAttribute("msg", "Sorry! we can't add this part.");
+            return "wrongInfo";
+        } else if (!flag) {
             return "modifyRepair";
         } else {
             return "addPart";
@@ -155,8 +158,9 @@ public class VehicleController {
 
     @PostMapping("/insertPart")
     public String insertPart(Part part){
-
-
+        Repair repair = repairService.availableForRepair(part.getVIN());
+        part.setStart_date(repair.getStart_date());
+        repairService.insertOrUpdatePart(part);
         return "redirect:/search";
     }
 }

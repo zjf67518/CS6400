@@ -48,7 +48,7 @@
     </update>
 
     <select id="searchPartByPK" parameterType="com.cs6400.carshop.bean.Part" resultType="com.cs6400.carshop.bean.Part">
-        select * from Part where start_date = #{start_date}, vin = #{vin}, vendor_name = #{vendor_name}, part_name = #{part_name}
+        select * from Part where start_date = #{start_date} and VIN = #{VIN} and vendor_name = #{vendor_name} and part_name = #{part_name}
     </select>
 
 

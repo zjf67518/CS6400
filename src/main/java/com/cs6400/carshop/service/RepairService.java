@@ -18,14 +18,14 @@ public class RepairService {
      * @param VIN
      * @return
      */
-    public boolean availableForRepair(String VIN){
+    public Repair availableForRepair(String VIN){
         ArrayList<Repair> list = repairMapper.searchRepairByVIN(VIN);
         for(Repair repair:list){
             if (repair.getComplete_date() == null){
-                return false;
+                return repair;
             }
         }
-        return true;
+        return null;
 
     }
     //新建维修
@@ -41,14 +41,14 @@ public class RepairService {
     public void completeRepair(Repair repair){
         repairMapper.completeRepair(repair);
     }
-//    //新建零件
-//    public void insertPart(Part part){
-//        repairMapper.insertPart(part);
-//    }
-//    //修改零件
-//    public void updatePart(Part part){
-//        repairMapper.updatePart(part);
-//    }
+    //新建零件
+    public void insertPart(Part part){
+        repairMapper.insertPart(part);
+    }
+    //修改零件
+    public void updatePart(Part part){
+        repairMapper.updatePart(part);
+    }
 
     // input: Part 判断四元组是否存在 不存在就修改 存在就更新
     public void insertOrUpdatePart(Part part){
