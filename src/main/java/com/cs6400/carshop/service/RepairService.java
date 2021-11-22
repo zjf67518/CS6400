@@ -38,13 +38,23 @@ public class RepairService {
     public void completeRepair(Repair repair){
         repairMapper.completeRepair(repair);
     }
-    //新建零件
-    public void insertPart(Part part){
-        repairMapper.insertPart(part);
-    }
-    //修改零件
-    public void updatePart(Part part){
-        repairMapper.updatePart(part);
+//    //新建零件
+//    public void insertPart(Part part){
+//        repairMapper.insertPart(part);
+//    }
+//    //修改零件
+//    public void updatePart(Part part){
+//        repairMapper.updatePart(part);
+//    }
+
+    // input: Part 判断四元组是否存在 不存在就修改 存在就更新
+    public void insertOrUpdatePart(Part part){
+        Part originPart = repairMapper.searchPartByPK(part);
+        if(originPart == null){
+            repairMapper.insertPart(part);
+        }else{
+            repairMapper.updatePart(part);
+        }
     }
 
 }

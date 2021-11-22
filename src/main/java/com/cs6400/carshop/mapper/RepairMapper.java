@@ -16,4 +16,6 @@ public interface RepairMapper {
     void insertPart(Part part);
     void updatePart(Part part);
 
+    Part searchPartByPK(Part part);
+
 }
