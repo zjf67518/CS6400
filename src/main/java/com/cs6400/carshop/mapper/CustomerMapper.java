@@ -5,7 +5,9 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface CustomerMapper {
-    Customer selectCustomerById(int id);
-    int insertIndividualCustomer(Customer customer);
-    int insertBusinessCustomer(Customer customer);
+    Customer selectIndividual(String driver_license);
+    Customer selectBusiness(String tax_id);
+    void insertCustomer(Customer customer);
+    void insertIndividual(Customer customer);
+    void insertBusiness(Customer customer);
 }

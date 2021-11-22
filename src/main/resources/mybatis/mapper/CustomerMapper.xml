@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cs6400.carshop.mapper.CustomerMapper">
+    <select id="selectIndividual" resultType="com.cs6400.carshop.bean.Customer">
+        select customer.customer_id, phone_number, email, address, driver_license, first_name, last_name from customer inner join individual on customer.customer_id = individual.customer_id
+        where driver_license = #{driver_license}
+    </select>
+
+    <select id="selectBusiness" resultType="com.cs6400.carshop.bean.Customer">
+        select customer.customer_id, phone_number, email, address, tax_id, business_name, contact, title from customer inner join Business on customer.customer_id = business.customer_id
+        where tax_id = #{tax_id}
+    </select>
+
+    <insert id="insertCustomer" parameterType="com.cs6400.carshop.bean.Customer" useGeneratedKeys="true" keyProperty="customer_id">
+            insert into Customer (customer_id, phone_number, email, address) values(#{customer_id}, #{phone_number}, #{email}, #{address})
+    </insert>
+    <insert id="insertIndividual" parameterType="com.cs6400.carshop.bean.Customer">
+        insert into Individual (driver_license, first_name, last_name, customer_id) values(#{driver_license}, #{first_name}, #{last_name}, #{customer_id})
+    </insert>
+    <insert id="insertBusiness" parameterType="com.cs6400.carshop.bean.Customer">
+        insert into Business (tax_id, business_name, contact, title, customer_id) values(#{tax_id}, #{business_name}, #{contact}, #{title}, #{customer_id})
+    </insert>
+
+</mapper>
