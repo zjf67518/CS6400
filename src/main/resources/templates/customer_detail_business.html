@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>customer message</title>
+</head>
+<body>
+<table class="display table table-bordered table-striped" id="dynamic-table">
+    <thead>
+    <tr>
+        <th>customer_id</th>
+        <th>phone_number</th>
+        <th>email</th>
+        <th>address</th>
+        <th>tax_id</th>
+        <th>business_name</th>
+        <th>contact</th>
+        <th>title</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="gradeX">
+        <td th:text="${customer.customer_id}"></td>
+        <td th:text="${customer.phone_number}"></td>
+        <td th:text="${customer.email}"></td>
+        <td th:text="${customer.address}"></td>
+        <td th:text="${customer.tax_id}"></td>
+        <td th:text="${customer.business_name}"></td>
+        <td th:text="${customer.contact}"></td>
+        <td th:text="${customer.title}"></td>
+    </tr>
+    </tfoot>
+</table>
+<form action="/search" method="get">
+    <input type="submit" value="return"/>
+</form>
+</body>
+</html>

@@ -5,6 +5,7 @@ import com.cs6400.carshop.service.CustomerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,18 +23,21 @@ public class CustomerController {
     }
 
     @PostMapping("/searchCustomer")
-    @ResponseBody
-    public Customer searchCustomer(String id, boolean idType){
+    public String searchCustomer(String id, boolean idType, Model model){
         System.out.println(id);
         System.out.println(idType);
         Customer customer = idType ?
                 customerService.searchIndividual(id) : customerService.searchBusiness(id);
         if (customer == null) {
-            return null;
+            model.addAttribute("msg", "Sorry, customer didn't exist");
+            return "wrongInfo";
         }
-        System.out.println(customer.toString());
-        return customer;
-//        return "redirect:/search";
+        model.addAttribute("customer", customer);
+        if (idType) {
+            return "customer_detail_individual";
+        } else {
+            return "customer_detail_business";
+        }
     }
 
     @GetMapping("/addCustomer")
