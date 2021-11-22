@@ -119,4 +119,20 @@ public class VehicleService {
     public BigDecimal searchInvoicePrice(String VIN){
         return vehicleMapper.searchInvoicePrice(VIN);
     }
+
+
+    public Vehicle searchVehicleForRepair(String VIN){
+        Vehicle vehicle = vehicleMapper.searchVehicleForRepair(VIN);
+        if (vehicle != null){
+            List<String> colors = vehicleMapper.searchColorByVIN(vehicle.getVIN());
+            StringBuilder sb =new StringBuilder();
+            for(String color:colors){
+                sb.append(color).append(' ');
+            }
+            vehicle.setColor(sb.toString());
+            vehicle.setManufacturer_name(vehicleMapper.searchManufacturerName(vehicle.getManufacturer_id()));
+            vehicle.setVehicle_name(VehicleType.TransferTypeToName(vehicle.getVehicle_type()));
+        }
+        return vehicle;
+    }
 }

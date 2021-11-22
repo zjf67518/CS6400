@@ -129,4 +129,10 @@ vehicle_type) values(#{VIN}, #{manufacturer_id}, #{invoice_price}, #{model_name}
         select invoice_price from Vehicle where VIN = #{VIN}
     </select>
 
+
+
+    <select id="searchVehicleForRepair" resultType="com.cs6400.carshop.bean.Vehicle">
+        select VIN, vehicle_type, model_year, model_name, manufacturer_id from vehicle
+        where vin = #{VIN} and vin in (select vin from transaction);
+    </select>
 </mapper>

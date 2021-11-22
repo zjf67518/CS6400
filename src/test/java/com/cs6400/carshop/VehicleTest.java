@@ -59,6 +59,13 @@ public class VehicleTest {
     }
 
     @Test
+    public void testForSearchVehicleForRepair(){
+        String VIN = "SUV2";
+        Vehicle vehicle = vehicleService.searchVehicleForRepair(VIN);
+        System.out.println(vehicle);
+    }
+
+    @Test
     public void testInvoicePrice(){
         System.out.println(vehicleService.searchInvoicePrice("Car1"));
     }

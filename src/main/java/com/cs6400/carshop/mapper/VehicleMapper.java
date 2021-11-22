@@ -33,4 +33,6 @@ public interface VehicleMapper {
     int insertColor(String VIN, String color);
 
     BigDecimal searchInvoicePrice(String VIN);
+
+    Vehicle searchVehicleForRepair(String VIN);
 }

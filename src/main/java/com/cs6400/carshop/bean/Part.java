@@ -5,12 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class Part {
-    private String start_date;
+    private Date start_date;
     private String VIN;
     private String vendor_name;
     private String part_name;
