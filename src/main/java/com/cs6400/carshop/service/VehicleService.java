@@ -7,6 +7,9 @@ import com.cs6400.carshop.utils.converter.SearchInfoConverter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -83,8 +86,9 @@ public class VehicleService {
         }
         return vehicle;
     }
-    public void addVehicle(Vehicle vehicle){
 
+    @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
+    public void addVehicle(Vehicle vehicle){
         vehicleMapper.insertVehicle(vehicle);
         switch(vehicle.getVehicle_type()){
             case 1:

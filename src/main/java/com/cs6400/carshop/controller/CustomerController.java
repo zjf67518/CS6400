@@ -1,16 +1,12 @@
 package com.cs6400.carshop.controller;
 
 import com.cs6400.carshop.bean.Customer;
-import com.cs6400.carshop.bean.RegularUser;
-import com.cs6400.carshop.bean.Vehicle;
 import com.cs6400.carshop.service.CustomerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import javax.servlet.http.HttpSession;
 
 @Slf4j
 @Controller
@@ -25,20 +21,27 @@ public class CustomerController {
     }
 
     @PostMapping("/searchCustomer")
-    public String searchCustomer(String id, boolean idType){
-        System.out.println(id);
-        System.out.println(idType);
-        return "redirect:/search";
+    public Customer searchCustomer(String id, boolean idType){
+        Customer customer = idType ?
+                customerService.searchIndividual(id) : customerService.searchBusiness(id);
+        System.out.println(customer.toString());
+        return customer;
+//        return "redirect:/search";
     }
 
     @GetMapping("/addCustomer")
     public String addCustomer(){
-        return "increCustomer";
+        return "addCustomer";
     }
 
     @PostMapping("/increCustomer")
     public String increCustomer(Customer customer){
         log.info(customer.toString());
+        if (customer.getDriver_license() != null) {
+            customerService.insertIndividual(customer);
+        } else {
+            customerService.insertBusiness(customer);
+        }
         return "redirect:/search";
     }
 }
