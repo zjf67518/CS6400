@@ -1,9 +1,7 @@
 package com.cs6400.carshop.controller;
 
-import com.cs6400.carshop.bean.RegularUser;
-import com.cs6400.carshop.bean.Repair;
-import com.cs6400.carshop.bean.Transaction;
-import com.cs6400.carshop.bean.Vehicle;
+import com.cs6400.carshop.bean.*;
+import com.cs6400.carshop.service.RepairService;
 import com.cs6400.carshop.service.TransactionService;
 import com.cs6400.carshop.service.VehicleService;
 import com.cs6400.carshop.utils.converter.SearchInfoConverter;
@@ -28,6 +26,9 @@ public class VehicleController {
 
     @Autowired
     private TransactionService transactionService;
+
+    @Autowired
+    private RepairService repairService;
 
     @PostMapping("/SaveSearchInfo")
     public String saveSearchInfo(SearchInfoConverter searchInfo, Model model){
@@ -85,7 +86,7 @@ public class VehicleController {
         return "redirect:/VehicleDetail/" + vehicle.getVIN();
     }
 
-    @GetMapping(value = {"/sellVehicle"})
+    @GetMapping("/sellVehicle")
     public String sellVehicle(){
         return "transaction";
     }
@@ -94,7 +95,7 @@ public class VehicleController {
     public String sellVehicle(Transaction transaction, HttpSession session, Model model){
         RegularUser user = (RegularUser) session.getAttribute("loginUser");
         BigDecimal price = vehicleService.searchInvoicePrice(transaction.getVIN());
-        BigDecimal mult = new BigDecimal(0.95);
+        BigDecimal mult = new BigDecimal("0.95");
 
         if (transaction.getSold_price().compareTo(price.multiply(mult)) < 0) {
             model.addAttribute("msg", "Sorry, the price does not meet the requirements.");
@@ -108,13 +109,53 @@ public class VehicleController {
         return "redirect:/search";
     }
 
-    @GetMapping(value = {"/repairVehicle"})
+    @GetMapping("/repairVehicle")
     public String repairVehicle(){
         return "repairVehicle";
     }
 
-    @PostMapping(value = {"/repairVehicle"})
-    public String repairVehicle(Repair repair){
+    @PostMapping("/repairVehicle")
+    public String repairVehicle(String VIN, boolean flag, Model model){
+        Vehicle Vehicle = vehicleService.whetherVehicleCanRepair(VIN);
+        if (Vehicle == null) {
+            model.addAttribute("msg", "Sorry! we can't repair it.");
+            return "wrongInfo";
+        }
+
+        boolean availableRepair = repairService.availableForRepair(VIN);
+        log.info("{}", availableRepair);
+        if (availableRepair && !flag) {
+            return "addRepair";
+        } else if (!availableRepair && !flag) {
+            return "modifyRepair";
+        } else {
+            return "addPart";
+        }
+    }
+
+    @PostMapping("/insertRepair")
+    public String insertRepair(Repair repair, HttpSession session){
+        RegularUser user = (RegularUser) session.getAttribute("loginUser");
+        repair.setService_writer_user_name(user.getUserName());
+        log.info(repair.toString());
+        repairService.insertRepair(repair);
+
+        return "redirect:/search";
+    }
+
+    @PostMapping("/modifyRepair")
+    public String modifyRepair(Repair repair, boolean complete){
+        log.info(repair.toString());
+        repairService.updateRepair(repair);
+        if (complete) {
+            repairService.completeRepair(repair);
+        }
+        return "redirect:/search";
+    }
+
+    @PostMapping("/insertPart")
+    public String insertPart(Part part){
+
 
         return "redirect:/search";
     }

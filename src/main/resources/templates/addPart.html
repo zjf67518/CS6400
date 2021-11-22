@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>add part</title>
+</head>
+<body>
+<div id="content" style="height:2000px;width:4000px;">
+    <form action="/insertPart" method="post">
+        VIN： <input name="VIN"/> <br/>
+        vendor_name： <input name="vendor_name"/> <br/>
+        part_name： <input name="part_name"/> <br/>
+        unit_price： <input name="unit_price"/> <br/>
+        quantity： <input name="quantity"/> <br/>
+        <input type="submit" value="add"/>
+    </form>
+</div>
+</body>
+</html>

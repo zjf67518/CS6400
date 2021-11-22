@@ -17,16 +17,14 @@ import java.util.Date;
 public class RepairTest {
     @Autowired
     private RepairService repairService;
-    @Test
 
+    @Test
     public void testCanBeRepaired(){
         String VIN = "Car1";
         System.out.println(repairService.availableForRepair(VIN));
     }
     @Test
     public void testInsertRepair(){
-
-
         Repair repair = new Repair();
         repair.setVIN("Car1");
         repair.setCustomer_id(1);
@@ -36,14 +34,10 @@ public class RepairTest {
     }
 
     @Test
-    public void testUpdateRepair() throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String stringTypeDate = "2021-11-22 16:40:39";
-        Date date = sdf.parse(stringTypeDate);
+    public void testUpdateRepair() {
         Repair repair = new Repair();
         repair.setVIN("Car1");
-        repair.setStart_date(date);
-        repair.setLabel_charge(BigDecimal.valueOf(12222));
+        repair.setLabel_charge(BigDecimal.valueOf(12223));
         repairService.updateRepair(repair);
     }
 

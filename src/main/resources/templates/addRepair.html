@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>add repair</title>
+</head>
+<body>
+<div id="content" style="height:2000px;width:4000px;">
+    <form action="/insertRepair" method="post">
+        VIN： <input name="VIN"/> <br/>
+        customer_id： <input name="customer_id"/> <br/>
+        odometer_reading： <input name="odometer_reading"/> <br/>
+        description： <input name="description"/> <br/>
+        <input type="radio" name="flag" value="True">add part <br/>
+        vendor_name： <input name="vendor_name"/> <br/>
+        part_name： <input name="part_name"/> <br/>
+        unit_price： <input name="unit_price"/> <br/>
+        quantity： <input name="quantity"/> <br/>
+
+        <input type="submit" value="add"/>
+    </form>
+</div>
+</body>
+</html>

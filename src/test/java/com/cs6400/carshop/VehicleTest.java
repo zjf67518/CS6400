@@ -1,7 +1,6 @@
 package com.cs6400.carshop;
 
 import com.cs6400.carshop.bean.Vehicle;
-import com.cs6400.carshop.mapper.VehicleMapper;
 import com.cs6400.carshop.service.VehicleService;
 import com.cs6400.carshop.utils.converter.SearchInfoConverter;
 import org.junit.jupiter.api.Test;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootTest
@@ -61,7 +59,7 @@ public class VehicleTest {
     @Test
     public void testForSearchVehicleForRepair(){
         String VIN = "SUV2";
-        Vehicle vehicle = vehicleService.searchVehicleForRepair(VIN);
+        Vehicle vehicle = vehicleService.whetherVehicleCanRepair(VIN);
         System.out.println(vehicle);
     }
 

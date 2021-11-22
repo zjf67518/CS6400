@@ -121,7 +121,13 @@ public class VehicleService {
     }
 
 
-    public Vehicle searchVehicleForRepair(String VIN){
+    /**
+     * VIN所对应的车是否存在，是否卖掉？
+     * 如果存在，且已经卖掉，则返回信息，否则返回null
+     * @param VIN
+     * @return
+     */
+    public Vehicle whetherVehicleCanRepair(String VIN){
         Vehicle vehicle = vehicleMapper.searchVehicleForRepair(VIN);
         if (vehicle != null){
             List<String> colors = vehicleMapper.searchColorByVIN(vehicle.getVIN());

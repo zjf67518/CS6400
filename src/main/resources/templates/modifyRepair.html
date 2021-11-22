@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>modify repair</title>
+</head>
+<body>
+<div id="content" style="height:2000px;width:4000px;">
+    <form action="/modifyRepair" method="post">
+        VIN： <input name="VIN"/> <br/>
+        label_charge： <input name="label_charge"/> <br/>
+        description： <input name="description"/> <br/>
+        <input type="radio" name="complete" value="True">complete
+        <input type="radio" name="complete" value="False">not complete <br/>
+        <input type="submit" value="modify"/>
+    </form>
+</div>
+</body>
+</html>

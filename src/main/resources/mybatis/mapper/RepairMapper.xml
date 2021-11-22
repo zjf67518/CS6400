@@ -9,11 +9,20 @@
     </insert>
 
     <update id="updateRepair" parameterType="com.cs6400.carshop.bean.Repair" >
-        update Repair set label_charge = #{label_charge}, description = #{description} where VIN = #{VIN} and start_date = #{start_date}
+        update Repair
+        <set>
+            <if test="label_charge != null">
+                label_charge = #{label_charge},
+            </if>
+            <if test="description != null">
+                description = #{description}
+            </if>
+        </set>
+        where VIN = #{VIN} and complete_date is null
     </update>
 
     <update id="completeRepair" parameterType="com.cs6400.carshop.bean.Repair" >
-        update Repair set complete_date = now() where VIN = #{VIN} and start_date = #{start_date}
+        update Repair set complete_date = now() where VIN = #{VIN} and complete_date is null
     </update>
 
     <select id="searchRepairByVIN" parameterType="String" resultType="com.cs6400.carshop.bean.Repair">
