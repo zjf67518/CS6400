@@ -1,5 +1,6 @@
 package com.cs6400.carshop.controller;
 
+import com.cs6400.carshop.bean.RegularUser;
 import com.cs6400.carshop.bean.Vehicle;
 import com.cs6400.carshop.service.VehicleService;
 import com.cs6400.carshop.utils.converter.SearchInfoConverter;
@@ -8,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,7 +58,7 @@ public class VehicleController {
     }
 
     @GetMapping("/VehicleDetail/{VIN}")
-    public String deleteUser(@PathVariable("VIN") String VIN, Model model){
+    public String vehicleDetail(@PathVariable("VIN") String VIN, Model model){
         Vehicle vehicle = vehicleService.searchVehicleDetail(VIN);
         Map<String,Object> map = new HashMap<>();
         model.addAttribute("vehicle", vehicle);
@@ -70,9 +71,12 @@ public class VehicleController {
     }
 
     @PostMapping("/SaveVehicleInfo")
-    public String saveVehicleInfo(Vehicle vehicle, Model model){
+    public String saveVehicleInfo(Vehicle vehicle, HttpSession session){
+        RegularUser user = (RegularUser) session.getAttribute("loginUser");
+        vehicle.setInventory_clerk_user_name(user.getUserName());
+        vehicleService.addVehicle(vehicle);
         log.info(vehicle.toString());
-        return "/VehicleDetail/" + vehicle.getVIN();
+        return "redirect:/VehicleDetail/" + vehicle.getVIN();
     }
 
 }

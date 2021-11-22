@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>findCustomer</title>
+</head>
+<body>
+<div id="content" style="height:2000px;width:4000px;">
+    <form action="/searchCustomer" method="post">
+        input: <input type="text" name="id">
+        <input type="radio" name="idType" value="True">driver_license
+        <input type="radio" name="idType" value="False">tax_id <br/>
+        <input type="submit" value="search"/>
+    </form>
+</div>
+</body>
+</html>

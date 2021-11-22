@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>addCustomer</title>
+</head>
+<body>
+<div id="content" style="height:2000px;width:4000px;">
+    <form action="/increCustomer" method="post">
+        customer_id： <input name="customer_id"/> <br/>
+        phone_number： <input name="phone_number"/> <br/>
+        email： <input name="email"/> <br/>
+        address： <input name="address"/> <br/>
+        Individual|
+        driver_license: <input name="driver_license"/>
+        first_name: <input name="first_name"/>
+        last_name: <input name="last_name"/> <br/>
+        Business|
+        tax_id: <input name="tax_id"/>
+        business_name: <input name="business_name"/>
+        contact: <input name="contact"/>
+        title: <input name="title"/> <br/>
+        <input type="submit" value="add"/>
+    </form>
+</div>
+</body>
+</html>

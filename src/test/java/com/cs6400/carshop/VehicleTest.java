@@ -43,7 +43,7 @@ public class VehicleTest {
     @Test
     public void testForInsertVehicle(){
         Vehicle vehicle = new Vehicle();
-        vehicle.setVIN("SUV2");
+        vehicle.setVIN("SUV3");
         vehicle.setManufacturer_id(1);
         vehicle.setModel_name("model3");
         vehicle.setModel_year(1995);
@@ -52,7 +52,7 @@ public class VehicleTest {
         vehicle.setVehicle_type(5);
         vehicle.setCupholder_number(2);
         vehicle.setDrivetrain_type("suv_type_2");
-        vehicle.setColor("white red blue");
+        vehicle.setColor("white,red,blue");
         vehicleService.addVehicle(vehicle);
 
 
