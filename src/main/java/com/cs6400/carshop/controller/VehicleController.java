@@ -1,6 +1,7 @@
 package com.cs6400.carshop.controller;
 
 import com.cs6400.carshop.bean.RegularUser;
+import com.cs6400.carshop.bean.Repair;
 import com.cs6400.carshop.bean.Transaction;
 import com.cs6400.carshop.bean.Vehicle;
 import com.cs6400.carshop.service.TransactionService;
@@ -107,4 +108,14 @@ public class VehicleController {
         return "redirect:/search";
     }
 
+    @GetMapping(value = {"/repairVehicle"})
+    public String repairVehicle(){
+        return "repairVehicle";
+    }
+
+    @PostMapping(value = {"/repairVehicle"})
+    public String repairVehicle(Repair repair){
+
+        return "redirect:/search";
+    }
 }
