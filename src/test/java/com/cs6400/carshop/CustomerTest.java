@@ -13,9 +13,12 @@ public class CustomerTest {
 
     @Test
     void findCustomer(){
-        String driver = "driver_license_1";
+        String driver = "drivere_license_2";
         Customer customer = customerService.searchIndividual(driver);
         System.out.println(customer);
+        String driver1 = "tax_id_1";
+        Customer customer1 = customerService.searchBusiness(driver1);
+        System.out.println(customer1);
     }
 
     @Test
@@ -29,14 +32,14 @@ public class CustomerTest {
 //        customer.setLast_name("qifeng");
 //        customerService.insertBusiness(customer);
         Customer customer = new Customer();
-        customer.setPhone_number("18819292934");
-        customer.setAddress("Beijing");
-        customer.setEmail("123@gatech.edu");
-        customer.setBusiness_name("Baidu");
-        customer.setTax_id("182323");
+        customer.setPhone_number("13301638071");
+        customer.setAddress("sh");
+        customer.setEmail("qzhu@gatech.edu");
+        customer.setBusiness_name("tc");
+        customer.setTax_id("192323");
         customer.setContact("contact1");
         customer.setTitle("Boss");
-        customerService.InsertBusiness(customer);
+        customerService.insertBusiness(customer);
 
 
 
