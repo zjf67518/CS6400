@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cs6400.carshop.mapper.TransactionMapper">
+    insert Transaction(purchase_date, customer_id, sold_price, sales_person_user_name, VIN) values()
+</mapper>
