@@ -114,4 +114,9 @@ public class VehicleService {
             vehicleMapper.insertColor(Vin, color);
         }
     }
+
+    //查询成本价 售价为判断95%以上才能交易
+    public BigDecimal searchInvoicePrice(String VIN){
+        return vehicleMapper.searchInvoicePrice(VIN);
+    }
 }
