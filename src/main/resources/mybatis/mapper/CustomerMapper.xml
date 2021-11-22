@@ -14,7 +14,7 @@
     </select>
 
     <insert id="insertCustomer" parameterType="com.cs6400.carshop.bean.Customer" useGeneratedKeys="true" keyProperty="customer_id">
-            insert into Customer (phone_number, email, address) values(#{phone_number}, #{email}, #{address})
+            insert into Customer (phone_number, email, address) values( #{phone_number}, #{email}, #{address})
     </insert>
     <insert id="insertIndividual" parameterType="com.cs6400.carshop.bean.Customer">
         insert into Individual (driver_license, first_name, last_name, customer_id) values(#{driver_license}, #{first_name}, #{last_name}, #{customer_id})

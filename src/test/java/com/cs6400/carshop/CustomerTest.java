@@ -31,12 +31,16 @@ public class CustomerTest {
         Customer customer = new Customer();
         customer.setPhone_number("18819292934");
         customer.setAddress("Beijing");
-        customer.setEmail("1234@gatech.edu");
+        customer.setEmail("123@gatech.edu");
         customer.setBusiness_name("Baidu");
-        customer.setTax_id("182325");
+        customer.setTax_id("182323");
         customer.setContact("contact1");
         customer.setTitle("Boss");
-        customerService.insertBusiness(customer);
-    }
+        customerService.InsertBusiness(customer);
 
+
+
+
+
+    }
 }
