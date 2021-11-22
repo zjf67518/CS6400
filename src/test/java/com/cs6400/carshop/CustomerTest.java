@@ -13,10 +13,10 @@ public class CustomerTest {
 
     @Test
     void findCustomer(){
-        String driver = "drivere_license_2";
+        String driver = "license_1111";
         Customer customer = customerService.searchIndividual(driver);
         System.out.println(customer);
-        String driver1 = "tax_id_1";
+        String driver1 = "182323";
         Customer customer1 = customerService.searchBusiness(driver1);
         System.out.println(customer1);
     }

@@ -4,6 +4,7 @@ import com.cs6400.carshop.bean.Vehicle;
 import com.cs6400.carshop.utils.converter.SearchInfoConverter;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,4 +31,6 @@ public interface VehicleMapper {
     int insertTruck(Vehicle vehicle);
 
     int insertColor(String VIN, String color);
+
+    BigDecimal searchInvoicePrice(String VIN);
 }

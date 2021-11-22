@@ -57,4 +57,9 @@ public class VehicleTest {
 
 
     }
+
+    @Test
+    public void testInvoicePrice(){
+        System.out.println(vehicleService.searchInvoicePrice("Car1"));
+    }
 }
