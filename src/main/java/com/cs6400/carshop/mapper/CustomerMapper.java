@@ -10,4 +10,6 @@ public interface CustomerMapper {
     void insertCustomer(Customer customer);
     void insertIndividual(Customer customer);
     void insertBusiness(Customer customer);
+    Customer selectIndividualById(Long customer_id);
+    Customer selectBusinessById(Long customer_id);
 }

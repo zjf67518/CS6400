@@ -51,5 +51,11 @@
         select * from Part where start_date = #{start_date} and VIN = #{VIN} and vendor_name = #{vendor_name} and part_name = #{part_name}
     </select>
 
+    <select id="searchRepairInfosByVIN" parameterType="String" resultType="com.cs6400.carshop.bean.RepairInfo">
+        select * from Repair where VIN = #{VIN} and complete_date is not null
+    </select>
 
+    <select id="searchPartFee" parameterType="com.cs6400.carshop.bean.RepairInfo" resultType="BigDecimal">
+        select a.part_cost from (select sum(unit_price * quantity) as part_cost, start_date, VIN from Part group by start_date, VIN) a where a.start_date = #{start_date} and a.VIN = #{VIN}
+    </select>
 </mapper>

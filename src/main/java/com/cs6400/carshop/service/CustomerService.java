@@ -35,4 +35,13 @@ public class CustomerService {
         log.info(customer.toString());
         customerMapper.insertBusiness(customer);
     }
+
+
+    public Customer searchCustomerById(Long id){
+        Customer customer = customerMapper.selectIndividualById(id);
+        if(customer == null){
+            customer = customerMapper.selectBusinessById(id);
+        }
+        return customer;
+    }
 }

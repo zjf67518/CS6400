@@ -18,8 +18,13 @@ public class TransactionTest {
         Transaction transaction = new Transaction();
         transaction.setVIN("SUV2");
         transaction.setSold_price(BigDecimal.valueOf(200000));
-        transaction.setCustomer_id(2);
+        transaction.setCustomer_id(2L);
         transaction.setSales_person_user_name("salesman_1");
         transactionService.insertTransaction(transaction);
+    }
+
+    @Test
+    public void testForSearch(){
+        System.out.println(transactionService.searchTransactionByVIN("Car1"));
     }
 }

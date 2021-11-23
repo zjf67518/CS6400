@@ -23,4 +23,14 @@
         insert into Business (tax_id, business_name, contact, title, customer_id) values(#{tax_id}, #{business_name}, #{contact}, #{title}, #{customer_id})
     </insert>
 
+    <select id="selectIndividualById" resultType="com.cs6400.carshop.bean.Customer">
+        select customer.customer_id, phone_number, email, address, driver_license, first_name, last_name from customer inner join individual on customer.customer_id = individual.customer_id
+        where customer.customer_id = #{customer_id}
+    </select>
+
+    <select id="selectBusinessById" resultType="com.cs6400.carshop.bean.Customer">
+        select customer.customer_id, phone_number, email, address, tax_id, business_name, contact, title from customer inner join Business on customer.customer_id = business.customer_id
+        where customer.customer_id = #{customer_id}
+    </select>
+
 </mapper>

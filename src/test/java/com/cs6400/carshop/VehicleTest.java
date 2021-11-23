@@ -67,4 +67,10 @@ public class VehicleTest {
     public void testInvoicePrice(){
         System.out.println(vehicleService.searchInvoicePrice("Car1"));
     }
+
+
+    @Test
+    public void vehicleByManager(){
+        System.out.println(vehicleService.searchVehicleDetailByManager("Car1"));
+    }
 }

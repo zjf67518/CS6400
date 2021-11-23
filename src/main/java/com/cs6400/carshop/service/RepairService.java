@@ -1,7 +1,9 @@
 package com.cs6400.carshop.service;
 
+import com.cs6400.carshop.bean.Customer;
 import com.cs6400.carshop.bean.Part;
 import com.cs6400.carshop.bean.Repair;
+import com.cs6400.carshop.bean.RepairInfo;
 import com.cs6400.carshop.mapper.RepairMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +14,8 @@ import java.util.ArrayList;
 public class RepairService {
     @Autowired
     private RepairMapper repairMapper;
-
+    @Autowired
+    private CustomerService customerService;
     /**
      * 判断卖掉的车辆是否可以维修 是：新建维修 否：说明车正在维修, 只能修改维修
      * @param VIN
@@ -58,6 +61,28 @@ public class RepairService {
         }else{
             repairMapper.updatePart(part);
         }
+    }
+
+
+
+    //根据VIN，搜索车辆的已完成维修的信息
+    public ArrayList<RepairInfo> searchRepairInfosByVIN(String VIN){
+        ArrayList<RepairInfo> repairInfos = repairMapper.searchRepairInfosByVIN(VIN);
+        for(RepairInfo info: repairInfos){
+            Long customer_id = info.getCustomer_id();
+            Customer customer = customerService.searchCustomerById(customer_id);
+            info.setPhone_number(customer.getPhone_number());
+            info.setEmail(customer.getEmail());
+            info.setAddress(customer.getAddress());
+            info.setFirst_name(customer.getFirst_name());
+            info.setLast_name(customer.getLast_name());
+            info.setBusiness_name(customer.getBusiness_name());
+            info.setContact(customer.getContact());
+            info.setTitle(customer.getTitle());
+            info.setPart_cost(repairMapper.searchPartFee(info));
+            info.setTotal_cost(info.getLabel_charge().add(info.getPart_cost()));
+        }
+        return repairInfos;
     }
 
 }

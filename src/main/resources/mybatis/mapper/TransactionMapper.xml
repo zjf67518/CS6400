@@ -6,5 +6,7 @@
     <insert id="insertTransaction" parameterType="com.cs6400.carshop.bean.Transaction" >
         insert into Transaction (purchase_date, customer_id, sold_price, sales_person_user_name, VIN) values(now(), #{customer_id}, #{sold_price}, #{sales_person_user_name}, #{VIN})
     </insert>
-
+    <select id="selectTransactionByVIN" resultType="com.cs6400.carshop.bean.Transaction">
+        select * from Transaction where VIN = #{VIN}
+    </select>
 </mapper>

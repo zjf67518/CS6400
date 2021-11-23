@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -37,5 +38,31 @@ public class Vehicle {
     private Integer cargo_capacity;
     private String cover_type;
     private Integer rear_axles_number;
+    //卖单信息
+    private Integer transaction_id;
+    private String purchase_date;
+    private Long customer_id;
+    private BigDecimal sold_price;
+    private String sales_person_user_name;
+    private String sales_person_first_name;
+    private String sales_person_last_name;
+    //买家信息
+    private String phone_number;
+    private String email;
+    private String address;
+
+    //Individual
+    private String first_name;
+    private String last_name;
+
+    //Business
+    private String business_name;
+    private String contact;
+    private String title;
+
+
+
+    //维修信息
+    private ArrayList<RepairInfo> repairInfos;
 
 }

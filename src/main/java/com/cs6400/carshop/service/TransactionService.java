@@ -12,4 +12,7 @@ public class TransactionService {
     public void insertTransaction(Transaction transaction){
         transactionMapper.insertTransaction(transaction);
     }
+    public Transaction searchTransactionByVIN(String VIN){
+        return transactionMapper.selectTransactionByVIN(VIN);
+    }
 }

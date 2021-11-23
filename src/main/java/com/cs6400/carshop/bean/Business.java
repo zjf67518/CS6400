@@ -12,5 +12,5 @@ public class Business {
     private String business_name;
     private String contact;
     private String title;
-    private String customer_id;
+    private Long customer_id;
 }

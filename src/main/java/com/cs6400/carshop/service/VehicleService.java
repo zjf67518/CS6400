@@ -1,6 +1,7 @@
 package com.cs6400.carshop.service;
 
-import com.cs6400.carshop.bean.Vehicle;
+import com.cs6400.carshop.bean.*;
+import com.cs6400.carshop.mapper.UserMapper;
 import com.cs6400.carshop.mapper.VehicleMapper;
 import com.cs6400.carshop.utils.Enum.VehicleType;
 import com.cs6400.carshop.utils.converter.SearchInfoConverter;
@@ -20,7 +21,15 @@ import java.util.List;
 public class VehicleService {
     @Autowired
     private VehicleMapper vehicleMapper;
+    @Autowired
+    private TransactionService transactionService;
+    @Autowired
+    private UserMapper userMapper;
+    @Autowired
+    private CustomerService customerService;
 
+    @Autowired
+    private RepairService repairService;
     public int selectVehicleForSale(){
         return vehicleMapper.selectCountVehicleForSale();
     }
@@ -138,6 +147,35 @@ public class VehicleService {
             vehicle.setColor(sb.toString());
             vehicle.setManufacturer_name(vehicleMapper.searchManufacturerName(vehicle.getManufacturer_id()));
             vehicle.setVehicle_name(VehicleType.TransferTypeToName(vehicle.getVehicle_type()));
+        }
+        return vehicle;
+    }
+
+    public Vehicle searchVehicleDetailByManager(String VIN){
+        Vehicle vehicle = this.searchVehicleDetail(VIN);
+        Transaction transaction = transactionService.searchTransactionByVIN(VIN);
+        if(transaction != null){
+            vehicle.setTransaction_id(transaction.getTransaction_id());
+            vehicle.setSold_price(transaction.getSold_price());
+            vehicle.setPurchase_date(transaction.getPurchase_date());
+            vehicle.setCustomer_id(transaction.getCustomer_id());
+            vehicle.setSales_person_user_name(transaction.getSales_person_user_name());
+            RegularUser user = userMapper.selectByUserName(vehicle.getSales_person_user_name());
+            vehicle.setSales_person_first_name(user.getFirst_name());
+            vehicle.setSales_person_last_name(user.getLast_name());
+            Customer customer = customerService.searchCustomerById(transaction.getCustomer_id());
+            vehicle.setPhone_number(customer.getPhone_number());
+            vehicle.setEmail(customer.getEmail());
+            vehicle.setAddress(customer.getAddress());
+            vehicle.setFirst_name(customer.getFirst_name());
+            vehicle.setLast_name(customer.getLast_name());
+            vehicle.setBusiness_name(customer.getBusiness_name());
+            vehicle.setContact(customer.getContact());
+            vehicle.setTitle(customer.getTitle());
+        }
+        ArrayList<RepairInfo> infos = repairService.searchRepairInfosByVIN(VIN);
+        if(infos != null) {
+            vehicle.setRepairInfos(infos);
         }
         return vehicle;
     }

@@ -46,4 +46,8 @@ public class CustomerTest {
 
 
     }
+    @Test
+    void findCustomer1(){
+        System.out.println(customerService.searchCustomerById(9L));
+    }
 }

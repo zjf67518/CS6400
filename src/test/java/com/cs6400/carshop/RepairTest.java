@@ -2,6 +2,7 @@ package com.cs6400.carshop;
 
 import com.cs6400.carshop.bean.Part;
 import com.cs6400.carshop.bean.Repair;
+import com.cs6400.carshop.bean.RepairInfo;
 import com.cs6400.carshop.service.RepairService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 @SpringBootTest
@@ -27,7 +29,7 @@ public class RepairTest {
     public void testInsertRepair(){
         Repair repair = new Repair();
         repair.setVIN("Car1");
-        repair.setCustomer_id(1);
+        repair.setCustomer_id(1L);
         repair.setOdometer_reading("10000");
         repair.setService_writer_user_name("store_owner");
         repairService.insertRepair(repair);
@@ -71,5 +73,13 @@ public class RepairTest {
 //        part.setUnit_price(BigDecimal.valueOf(100.00));
         repairService.updatePart(part);
 
+    }
+
+    @Test
+    public void testRepairInfos(){
+        ArrayList<RepairInfo> list = repairService.searchRepairInfosByVIN("Car1");
+        for(RepairInfo info: list){
+            System.out.println(info);
+        }
     }
 }

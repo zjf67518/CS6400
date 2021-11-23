@@ -7,5 +7,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface TransactionMapper {
 
     int insertTransaction(Transaction transaction);
-
+    Transaction selectTransactionByVIN(String VIN);
 }
