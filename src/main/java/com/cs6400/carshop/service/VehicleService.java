@@ -179,4 +179,42 @@ public class VehicleService {
         }
         return vehicle;
     }
+
+    public List<Vehicle> searchSoldVehicleByManager(SearchInfoConverter searchInfoConverter){
+        if (searchInfoConverter.getPrice() != null){
+            searchInfoConverter.setPrice(searchInfoConverter.getPrice().divide(BigDecimal.valueOf(1.25)));
+        }
+        List<Vehicle> list = vehicleMapper.searchSoldVehicleByAttribute(searchInfoConverter);
+        for(Vehicle vehicle:list){
+            List<String> colors = vehicleMapper.searchColorByVIN(vehicle.getVIN());
+            StringBuilder sb =new StringBuilder();
+            for(String color:colors){
+                sb.append(color).append(' ');
+            }
+            vehicle.setColor(sb.toString());
+            vehicle.setManufacturer_name(vehicleMapper.searchManufacturerName(vehicle.getManufacturer_id()));
+            vehicle.setInvoice_price(vehicle.getInvoice_price().multiply(BigDecimal.valueOf(1.25)));
+            vehicle.setVehicle_name(VehicleType.TransferTypeToName(vehicle.getVehicle_type()));
+        }
+        return list;
+    }
+
+    public List<Vehicle> searchAllVehicleByManager(SearchInfoConverter searchInfoConverter){
+        if (searchInfoConverter.getPrice() != null){
+            searchInfoConverter.setPrice(searchInfoConverter.getPrice().divide(BigDecimal.valueOf(1.25)));
+        }
+        List<Vehicle> list = vehicleMapper.searchAllVehicleByAttribute(searchInfoConverter);
+        for(Vehicle vehicle:list){
+            List<String> colors = vehicleMapper.searchColorByVIN(vehicle.getVIN());
+            StringBuilder sb =new StringBuilder();
+            for(String color:colors){
+                sb.append(color).append(' ');
+            }
+            vehicle.setColor(sb.toString());
+            vehicle.setManufacturer_name(vehicleMapper.searchManufacturerName(vehicle.getManufacturer_id()));
+            vehicle.setInvoice_price(vehicle.getInvoice_price().multiply(BigDecimal.valueOf(1.25)));
+            vehicle.setVehicle_name(VehicleType.TransferTypeToName(vehicle.getVehicle_type()));
+        }
+        return list;
+    }
 }

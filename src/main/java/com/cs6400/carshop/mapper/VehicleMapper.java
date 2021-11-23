@@ -35,4 +35,7 @@ public interface VehicleMapper {
     BigDecimal searchInvoicePrice(String VIN);
 
     Vehicle searchVehicleForRepair(String VIN);
+
+    List<Vehicle> searchAllVehicleByAttribute(SearchInfoConverter searchInfoConverter);
+    List<Vehicle> searchSoldVehicleByAttribute(SearchInfoConverter searchInfoConverter);
 }
