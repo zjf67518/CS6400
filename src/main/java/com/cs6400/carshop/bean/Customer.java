@@ -13,6 +13,8 @@ public class Customer {
     private String email;
     private String address;
 
+
+    private Boolean isIndividual;
     //Individual
     private String driver_license;
     private String first_name;

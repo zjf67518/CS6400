@@ -50,6 +50,7 @@ public class Vehicle {
     private String phone_number;
     private String email;
     private String address;
+    private Boolean isIndividual;
 
     //Individual
     private String first_name;

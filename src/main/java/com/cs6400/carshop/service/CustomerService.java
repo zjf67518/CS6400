@@ -40,8 +40,11 @@ public class CustomerService {
     public Customer searchCustomerById(Long id){
         Customer customer = customerMapper.selectIndividualById(id);
         if(customer == null){
+
             customer = customerMapper.selectBusinessById(id);
+            customer.setIsIndividual(false);
         }
+        customer.setIsIndividual(true);
         return customer;
     }
 }

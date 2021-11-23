@@ -172,6 +172,7 @@ public class VehicleService {
             vehicle.setBusiness_name(customer.getBusiness_name());
             vehicle.setContact(customer.getContact());
             vehicle.setTitle(customer.getTitle());
+            vehicle.setIsIndividual(customer.getIsIndividual());
         }
         ArrayList<RepairInfo> infos = repairService.searchRepairInfosByVIN(VIN);
         if(infos != null) {
