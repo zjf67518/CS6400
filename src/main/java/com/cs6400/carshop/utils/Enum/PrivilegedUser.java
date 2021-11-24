@@ -1,16 +1,16 @@
 package com.cs6400.carshop.utils.Enum;
 
 public enum PrivilegedUser {
-    inventory_clerk(6), sales_person(11), service_writer(19), manager(34), owner(255);
+    inventory_clerk(6), sales_person(11), service_writer(19), manager(98), owner(255);
 
-    private int type;
+    private int code;
 
-    public int getType() {
-        return type;
+    public int getCode() {
+        return code;
     }
 
-    PrivilegedUser(int type) {
-        this.type = type;
+    PrivilegedUser(int code) {
+        this.code = code;
     }
 
     public static PrivilegedUser TransferPrivilegedUser(String Authority) {

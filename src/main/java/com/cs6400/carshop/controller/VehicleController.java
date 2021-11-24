@@ -4,6 +4,7 @@ import com.cs6400.carshop.bean.*;
 import com.cs6400.carshop.service.RepairService;
 import com.cs6400.carshop.service.TransactionService;
 import com.cs6400.carshop.service.VehicleService;
+import com.cs6400.carshop.utils.Enum.AuthorFunction;
 import com.cs6400.carshop.utils.converter.SearchInfoConverter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,10 +52,17 @@ public class VehicleController {
             searchInfo.setVIN(null);
         }
 
+        List<Vehicle> list = null;
         Map<String, Object> map = new HashMap<>();
-        List<Vehicle> list = vehicleService.searchVehicleUsedByCustomer(searchInfo);
-        log.info("searchInfo:{}", searchInfo.getVIN());
 
+        if (searchInfo.getFilterBy() == null || searchInfo.getFilterBy() == 0) {
+            list = vehicleService.searchVehicleUsedByCustomer(searchInfo);
+        } else if (searchInfo.getFilterBy() == 1) {
+            list = vehicleService.searchSoldVehicleByManager(searchInfo);
+        } else {
+            list = vehicleService.searchAllVehicleByManager(searchInfo);
+        }
+        log.info("searchInfo:{}", searchInfo.getVIN());
 
         if (list.isEmpty()) {
             model.addAttribute("msg", "Sorry, it looks like we don’t have that in stock!");
@@ -66,8 +74,19 @@ public class VehicleController {
     }
 
     @GetMapping("/VehicleDetail/{VIN}")
-    public String vehicleDetail(@PathVariable("VIN") String VIN, Model model){
-        Vehicle vehicle = vehicleService.searchVehicleDetail(VIN);
+    public String vehicleDetail(@PathVariable("VIN") String VIN, Model model, HttpSession session){
+        RegularUser user = (RegularUser) session.getAttribute("loginUser");
+        log.info("{}", user);
+
+        Vehicle vehicle = null;
+        if (user == null) {
+            vehicle = vehicleService.searchVehicleDetail(VIN);
+        } else {
+            vehicle = (user.getAuthority() & AuthorFunction.VehicleDetail.getCode()) != AuthorFunction.VehicleDetail.getCode()
+                    ? vehicleService.searchVehicleDetail(VIN) : vehicleService.searchVehicleDetailByManager(VIN);
+        }
+
+        log.info("{}", vehicle);
         model.addAttribute("vehicle", vehicle);
         return "vehicle_detail";
     }

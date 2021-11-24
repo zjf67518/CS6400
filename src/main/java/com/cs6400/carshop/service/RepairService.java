@@ -8,6 +8,7 @@ import com.cs6400.carshop.mapper.RepairMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 @Service
@@ -80,6 +81,9 @@ public class RepairService {
             info.setContact(customer.getContact());
             info.setTitle(customer.getTitle());
             info.setPart_cost(repairMapper.searchPartFee(info));
+            if (info.getPart_cost() == null) {
+                info.setPart_cost(BigDecimal.valueOf(0L));
+            }
             info.setTotal_cost(info.getLabel_charge().add(info.getPart_cost()));
         }
         return repairInfos;

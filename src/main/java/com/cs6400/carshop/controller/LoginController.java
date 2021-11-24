@@ -39,7 +39,7 @@ public class LoginController {
 
         if(map.containsKey("user")) {
             //把登陆成功的用户保存起来
-            user.setAuthority(userService.searchUserType(user.getUserName()));
+            user.setAuthority(userService.searchUserType(user.getUserName()).getCode());
             session.setAttribute("loginUser",user);
             //登录成功重定向到main.html;  重定向防止表单重复提交
             return "redirect:/search";

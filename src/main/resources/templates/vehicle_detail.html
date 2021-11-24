@@ -130,6 +130,131 @@
                                     </tfoot>
                                 </table>
 
+                                <table class="display table table-bordered table-striped" id="transaction_detail">
+                                    <thead>
+                                    <tr>
+                                        <th>transaction_id</th>
+                                        <th>purchase_date</th>
+                                        <th>customer_id</th>
+                                        <th>sold_price</th>
+                                        <th>sales_person_user_name</th>
+                                        <th>sales_person_first_name</th>
+                                        <th>sales_person_last_name</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="gradeX">
+                                        <td th:text="${vehicle.transaction_id}"></td>
+                                        <td th:text="${vehicle.purchase_date}"></td>
+                                        <td th:text="${vehicle.customer_id}"></td>
+                                        <td th:text="${vehicle.sold_price}"></td>
+                                        <td th:text="${vehicle.sales_person_user_name}"></td>
+                                        <td th:text="${vehicle.sales_person_first_name}"></td>
+                                        <td th:text="${vehicle.sales_person_last_name}"></td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+
+                                <table class="display table table-bordered table-striped" id="customer_detail">
+                                    <thead>
+                                    <tr>
+                                        <th>phone_number</th>
+                                        <th>email</th>
+                                        <th>address</th>
+                                        <th>isIndividual</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="gradeX">
+                                        <td th:text="${vehicle.phone_number}"></td>
+                                        <td th:text="${vehicle.email}"></td>
+                                        <td th:text="${vehicle.address}"></td>
+                                        <td th:text="${vehicle.isIndividual}"></td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+
+                                <table class="display table table-bordered table-striped" id="repair_detail">
+                                    <thead>
+                                    <tr>
+                                        <th>start_date</th>
+                                        <th>VIN</th>
+                                        <th>complete_date</th>
+                                        <th>customer_id</th>
+                                        <th>service_writer_user_name</th>
+                                        <th>label_charge</th>
+                                        <th>part_cost</th>
+                                        <th>total_cost</th>
+                                        <th>phone_number</th>
+                                        <th>email</th>
+                                        <th>address</th>
+                                        <li th:if="${vehicle.isIndividual==true}">
+                                            <th>first_name</th>
+                                            <th>last_name</th>
+                                        </li>
+                                        <li th:if="${vehicle.isIndividual==false}">
+                                            <th>business_name</th>
+                                            <th>contact</th>
+                                            <th>title</th>
+                                        </li>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="gradeX">
+                                    <tr class="gradeX" th:each="repairInfo: ${vehicle.repairInfos}">
+                                        <td th:text="${repairInfo.start_date}"></td>
+                                        <td th:text="${repairInfo.VIN}"></td>
+                                        <td th:text="${repairInfo.complete_date}"></td>
+                                        <td th:text="${repairInfo.customer_id}"></td>
+                                        <td th:text="${repairInfo.service_writer_user_name}"></td>
+                                        <td th:text="${repairInfo.label_charge}"></td>
+                                        <td th:text="${repairInfo.part_cost}"></td>
+                                        <td th:text="${repairInfo.total_cost}"></td>
+                                        <td th:text="${repairInfo.phone_number}"></td>
+                                        <td th:text="${repairInfo.email}"></td>
+                                        <td th:text="${repairInfo.address}"></td>
+                                        <li th:if="${vehicle.isIndividual==true}">
+                                            <td th:text="${repairInfo.first_name}"></td>
+                                            <td th:text="${repairInfo.last_name}"></td>
+                                        </li>
+                                        <li th:if="${vehicle.isIndividual==false}">
+                                            <td th:text="${repairInfo.business_name}"></td>
+                                            <td th:text="${repairInfo.contact}"></td>
+                                            <td th:text="${repairInfo.title}"></td>
+                                        </li>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+
+                                <table class="display table table-bordered table-striped" id="Individual_detail">
+                                    <thead>
+                                    <tr>
+                                        <li th:if="${vehicle.isIndividual==true}">
+                                            <th>first_name</th>
+                                            <th>last_name</th>
+                                        </li>
+                                        <li th:if="${vehicle.isIndividual==false}">
+                                            <th>business_name</th>
+                                            <th>contact</th>
+                                            <th>title</th>
+                                        </li>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="gradeX">
+                                        <li th:if="${vehicle.isIndividual==true}">
+                                            <td th:text="${vehicle.first_name}"></td>
+                                            <td th:text="${vehicle.last_name}"></td>
+                                        </li>
+                                        <li th:if="${vehicle.isIndividual==false}">
+                                            <td th:text="${vehicle.business_name}"></td>
+                                            <td th:text="${vehicle.contact}"></td>
+                                            <td th:text="${vehicle.title}"></td>
+                                        </li>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+
                                 <div class="row-fluid">
                                     <div class="span6">
                                         <div class="dataTables_info" id="dynamic-table_info">
