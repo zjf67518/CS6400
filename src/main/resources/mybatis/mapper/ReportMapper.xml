@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cs6400.carshop.mapper.ReportMapper">
+    <select id="selectColorReportAllTime" resultType="com.cs6400.carshop.bean.Color">
+        select * from Color where VIN =
+    </select>
+
+    <select id="selectAllTransactionVINAllTime" resultType="String">
+        select VIN from Transaction;
+    </select>
+    <select id="selectAllTransactionVINByMonth" resultType="String">
+        Select VIN from transaction where purchase_date >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH);
+    </select>
+    <select id="selectAllTransactionVINByYear" resultType="String">
+        select VIN from Transaction where purchase_date >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR);
+    </select>
+</mapper>
