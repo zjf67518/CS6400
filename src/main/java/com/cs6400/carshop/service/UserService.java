@@ -2,6 +2,7 @@ package com.cs6400.carshop.service;
 
 import com.cs6400.carshop.bean.RegularUser;
 import com.cs6400.carshop.mapper.UserMapper;
+import com.cs6400.carshop.utils.Enum.PrivilegedUser;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,21 +45,21 @@ public class UserService {
         return map;
     }
 
-    public String searchUserType(String username){
+    public PrivilegedUser searchUserType(String username){
         if(userMapper.selectOwner(username) != null){
-            return "Owner";
+            return PrivilegedUser.owner;
         }
         if(userMapper.selectInventoryClerk(username) != null){
-            return "InventoryClerk";
+            return PrivilegedUser.inventory_clerk;
         }
         if(userMapper.selectSalePerson(username) != null){
-            return "SalePerson";
+            return PrivilegedUser.sales_person;
         }
         if(userMapper.selectServiceWriter(username) != null){
-            return "ServiceWriter";
+            return PrivilegedUser.service_writer;
         }
         if(userMapper.selectManager(username) != null){
-            return "Manager";
+            return PrivilegedUser.manager;
         }
         return null;
     }

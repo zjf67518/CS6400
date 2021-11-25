@@ -138,6 +138,13 @@
         </select>
         <input type="radio" name="desc" value="True">desc
         <input type="radio" name="desc" value="False">asc<br/>
+        <li th:if="${session.loginUser!=null}">
+            filter by: <select name="filterBy">
+            <option value=0 selected>unsold</option>
+            <option value=1>sold</option>
+            <option value=2>all</option>
+        </select><br/>
+        </li>
         <input type="submit" value="search"/>
     </form>
 </div>

@@ -16,4 +16,5 @@ public class SearchInfoConverter {
     private String orderby;
     private Boolean priceOrder;
     private Boolean desc;
+    private Integer filterBy;
 }
