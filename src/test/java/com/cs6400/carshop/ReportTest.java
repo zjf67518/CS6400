@@ -58,4 +58,19 @@ public class ReportTest {
         Map<String,Integer> report2 = reportService.reportByManufacturer(2);
         System.out.println(report2);
     }
+
+    @Test
+    public void testPartReport(){
+        System.out.println(reportService.reportByPart());
+    }
+
+    @Test
+    public void testBelowCost(){
+        System.out.println(reportService.reportBelowCostSales());
+    }
+
+    @Test
+    public void testInventoryDays(){
+        System.out.println(reportService.reportInventoryDays());
+    }
 }

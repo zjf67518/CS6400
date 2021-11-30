@@ -1,6 +1,8 @@
 package com.cs6400.carshop.service;
 
+import com.cs6400.carshop.bean.BelowCostStatistic;
 import com.cs6400.carshop.bean.Color;
+import com.cs6400.carshop.bean.PartStatistic;
 import com.cs6400.carshop.bean.Vehicle;
 import com.cs6400.carshop.mapper.ReportMapper;
 import com.cs6400.carshop.mapper.VehicleMapper;
@@ -159,6 +161,52 @@ public class ReportService {
         report.put("Truck", 0);
         report.put("Van", 0);
         report.put("SUV", 0);
+        return report;
+    }
+
+
+    public ArrayList<PartStatistic> reportByPart(){
+        return reportMapper.selectPartStatistic();
+    }
+
+    public ArrayList<BelowCostStatistic> reportBelowCostSales(){
+        List<Vehicle> saleReport = vehicleService.searchSoldVehicleByManager(new SearchInfoConverter());
+        ArrayList<BelowCostStatistic> report = new ArrayList<>();
+        for(Vehicle vehicle: saleReport){
+            BelowCostStatistic belowCostStatistic = new BelowCostStatistic();
+            vehicle = vehicleService.searchVehicleDetailByManager(vehicle.getVIN());
+            belowCostStatistic.setPurchase_date(vehicle.getPurchase_date());
+            belowCostStatistic.setInvoice_price(vehicle.getInvoice_price());
+            belowCostStatistic.setSold_price(vehicle.getSold_price());
+            belowCostStatistic.setFirst_name(vehicle.getFirst_name());
+            belowCostStatistic.setLast_name(vehicle.getLast_name());
+            belowCostStatistic.setBusiness_name(vehicle.getBusiness_name());
+            belowCostStatistic.setSales_person_user_name(vehicle.getSales_person_user_name());
+            belowCostStatistic.setRatio(belowCostStatistic.getSold_price().divide(belowCostStatistic.getInvoice_price(), 3));
+            report.add(belowCostStatistic);
+        }
+
+        return report;
+
+    }
+
+    private Map<String, Double> initialInventoryByTypeReport(){
+        Map<String, Double> report = new HashMap<>();
+        report.put("Car", 0.0);
+        report.put("Convertible", 0.0);
+        report.put("Truck", 0.0);
+        report.put("Van", 0.0);
+        report.put("SUV", 0.0);
+        return report;
+    }
+
+    public Map<String, Double> reportInventoryDays(){
+        Map<String, Double> report = initialInventoryByTypeReport();
+        report.put("Car", reportMapper.selectInventoryDayByVehicleType(1));
+        report.put("Convertible", reportMapper.selectInventoryDayByVehicleType(2));
+        report.put("Truck", reportMapper.selectInventoryDayByVehicleType(3));
+        report.put("Van", reportMapper.selectInventoryDayByVehicleType(4));
+        report.put("SUV", reportMapper.selectInventoryDayByVehicleType(5));
         return report;
     }
 }

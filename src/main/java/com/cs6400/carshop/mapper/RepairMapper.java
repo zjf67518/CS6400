@@ -1,6 +1,7 @@
 package com.cs6400.carshop.mapper;
 
 import com.cs6400.carshop.bean.Part;
+import com.cs6400.carshop.bean.PartStatistic;
 import com.cs6400.carshop.bean.Repair;
 import com.cs6400.carshop.bean.RepairInfo;
 import org.apache.ibatis.annotations.Mapper;
@@ -25,4 +26,7 @@ public interface RepairMapper {
     ArrayList<RepairInfo> searchRepairInfosByVIN(String VIN);
 
     BigDecimal searchPartFee(RepairInfo repairInfo);
+
+
+
 }

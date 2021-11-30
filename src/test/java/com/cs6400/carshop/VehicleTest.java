@@ -76,4 +76,9 @@ public class VehicleTest {
     public void vehicleByManager(){
         System.out.println(vehicleService.searchVehicleDetailByManager("Car1"));
     }
+
+    @Test
+    public void vehicleSoldByManager(){
+        System.out.println(vehicleService.searchSoldVehicleByManager(new SearchInfoConverter()));
+    }
 }

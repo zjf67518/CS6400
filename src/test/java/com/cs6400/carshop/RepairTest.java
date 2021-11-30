@@ -52,7 +52,7 @@ public class RepairTest {
         part.setStart_date(date);
         part.setVIN("Car1");
         part.setQuantity(3);
-        part.setVendor_name("Benz");
+        part.setVendor_name("BMW");
         part.setUnit_price(BigDecimal.valueOf(12.000));
         part.setPart_name("Hammer");
         repairService.insertPart(part);

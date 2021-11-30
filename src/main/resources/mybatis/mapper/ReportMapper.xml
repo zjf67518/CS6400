@@ -3,9 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cs6400.carshop.mapper.ReportMapper">
-    <select id="selectColorReportAllTime" resultType="com.cs6400.carshop.bean.Color">
-        select * from Color where VIN =
-    </select>
+
 
     <select id="selectAllTransactionVINAllTime" resultType="String">
         select VIN from Transaction;
@@ -15,5 +13,18 @@
     </select>
     <select id="selectAllTransactionVINByYear" resultType="String">
         select VIN from Transaction where purchase_date >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR);
+    </select>
+
+
+    <select id="selectPartStatistic" resultType="com.cs6400.carshop.bean.PartStatistic">
+        select vendor_name, sum(quantity) as quantity, sum(unit_price * quantity) as total_part_fee FROM PART group by vendor_name
+    </select>
+
+    <select id="selectInventoryDayByVehicleType" resultType="Double">
+        SELECT avg(datediff(v.added_date, t.purchase_date))
+        FROM transaction as t
+                 INNER JOIN vehicle as v
+                            on t.VIN = v.VIN where v.vehicle_type = #{vehicle_type}
+
     </select>
 </mapper>
