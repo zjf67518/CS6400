@@ -8,6 +8,7 @@ import com.cs6400.carshop.mapper.ReportMapper;
 import com.cs6400.carshop.mapper.VehicleMapper;
 import com.cs6400.carshop.utils.Enum.VehicleType;
 import com.cs6400.carshop.utils.converter.SearchInfoConverter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Service
 public class ReportService {
     @Autowired
@@ -37,6 +39,7 @@ public class ReportService {
                 if(colors.size()>1){
                     report.put("Multiple", report.get("Multiple") + 1);
                 }else{
+                    log.info("{}", colors.get(0));
                     report.put(colors.get(0), report.get(colors.get(0)) + 1);
                 }
             }
