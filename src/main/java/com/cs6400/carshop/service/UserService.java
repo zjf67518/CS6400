@@ -3,15 +3,20 @@ package com.cs6400.carshop.service;
 import com.cs6400.carshop.bean.RegularUser;
 import com.cs6400.carshop.mapper.UserMapper;
 import com.cs6400.carshop.utils.Enum.PrivilegedUser;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
     @Autowired
     private UserMapper userMapper;
 
@@ -62,5 +67,18 @@ public class UserService {
             return PrivilegedUser.manager;
         }
         return null;
+    }
+
+    public RegularUser findUserByName(String username) {
+        System.out.println(username);
+        RegularUser user = userMapper.selectByUserName(username);
+        log.info("{}", user);
+        user.setAuthority(searchUserType(user.getUsername()).getCode());
+        return user;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return this.findUserByName(username);
     }
 }

@@ -99,7 +99,7 @@ public class VehicleController {
     @PostMapping("/SaveVehicleInfo")
     public String saveVehicleInfo(Vehicle vehicle, HttpSession session){
         RegularUser user = (RegularUser) session.getAttribute("loginUser");
-        vehicle.setInventory_clerk_user_name(user.getUserName());
+        vehicle.setInventory_clerk_user_name(user.getUsername());
         vehicleService.addVehicle(vehicle);
         log.info(vehicle.toString());
         return "redirect:/VehicleDetail/" + vehicle.getVIN();
@@ -121,7 +121,7 @@ public class VehicleController {
             return "wrongInfo";
         }
 
-        transaction.setSales_person_user_name(user.getUserName());
+        transaction.setSales_person_user_name(user.getUsername());
         transactionService.insertTransaction(transaction);
         log.info(transaction.toString());
 
@@ -158,7 +158,7 @@ public class VehicleController {
     @PostMapping("/insertRepair")
     public String insertRepair(Repair repair, HttpSession session){
         RegularUser user = (RegularUser) session.getAttribute("loginUser");
-        repair.setService_writer_user_name(user.getUserName());
+        repair.setService_writer_user_name(user.getUsername());
         log.info(repair.toString());
         repairService.insertRepair(repair);
 
