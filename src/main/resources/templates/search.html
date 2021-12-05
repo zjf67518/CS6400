@@ -13,7 +13,7 @@
     </li>
     <li th:if="${session.loginUser!=null}">
         welcome!
-        <h5 th:text="${session.loginUser.UserName}">user</h5>
+        <h5 th:text="${session.loginUser.username}">user</h5>
         <form action="/logout" method="get">
         <input value="logout" type="submit"/>
         </form>
@@ -28,6 +28,9 @@
         </form>
         <form action="/repairVehicle" method="get">
             <input value="repairVehicle" type="submit"/>
+        </form>
+        <form action="/getReport" method="get">
+            <input value="report" type="submit"/>
         </form>
     </li>
     Available vehicles

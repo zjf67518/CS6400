@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>report</title>
+</head>
+<body>
+<div id="return" style="float:right;">
+    <form action="/search" method="get">
+        <input type="submit" value="return"/>
+    </form>
+</div>
+<div id="content" style="height:2000px;width:4000px;">
+    <form action="/salesByColor" method="get">
+        time_scope： <select name="input">
+        <option value=0>AllTime</option>
+        <option value=1>Month</option>
+        <option value=2>Year</option>
+    </select>
+        <input value="salesByColor" type="submit"/>
+    </form>
+    <form action="/salesByType" method="get">
+        time_scope： <select name="input">
+        <option value=0>AllTime</option>
+        <option value=1>Month</option>
+        <option value=2>Year</option>
+    </select>
+        <input value="salesByType" type="submit"/>
+    </form>
+    <form action="/salesByManufacturer" method="get">
+        time_scope： <select name="input">
+        <option value=0>AllTime</option>
+        <option value=1>Month</option>
+        <option value=2>Year</option>
+    </select>
+        <input value="salesByManufacturer" type="submit"/>
+    </form>
+    <form action="/grossCustomerIncome" method="get">
+        <input value="grossCustomerIncome" type="submit"/>
+    </form>
+    <form action="/repairByManufacturer" method="get">
+        <input value="repairsByManufacturer" type="submit"/>
+    </form>
+    <form action="/repairByType" method="get">
+        <input value="repairByType" type="submit"/>
+    </form>
+    <form action="/repairByModel" method="get">
+        <input value="repairByModel" type="submit"/>
+    </form>
+    <form action="/belowCostSales" method="get">
+        <input value="belowCostSales" type="submit"/>
+    </form>
+    <form action="/averageTimeInInventory" method="get">
+        <input value="averageTimeinInventory" type="submit"/>
+    </form>
+    <form action="/partsStatistics" method="get">
+        <input value="partsStatistics" type="submit"/>
+    </form>
+    <form action="/monthlySales" method="get">
+        <input value="monthlySales" type="submit"/>
+    </form>
+</div>
+</body>
+</html>

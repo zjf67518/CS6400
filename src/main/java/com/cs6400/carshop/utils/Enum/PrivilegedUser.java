@@ -5,7 +5,7 @@ public enum PrivilegedUser {
 
     private int code;
 
-    public int getCode() {
+    public Integer getCode() {
         return code;
     }
 

@@ -6,7 +6,7 @@
 
 
     <select id="selectByUserName" resultType="com.cs6400.carshop.bean.RegularUser">
-        select * from RegularUser where user_name = #{username}
+        select user_name as username, first_name, last_name, password from RegularUser where user_name = #{username}
     </select>
 
 
