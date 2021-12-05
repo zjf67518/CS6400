@@ -115,8 +115,9 @@ public class VehicleController {
         RegularUser user = (RegularUser) session.getAttribute("loginUser");
         BigDecimal price = vehicleService.searchInvoicePrice(transaction.getVIN());
         BigDecimal mult = new BigDecimal("0.95");
-
-        if (transaction.getSold_price().compareTo(price.multiply(mult)) < 0) {
+        // 没有随意调价格的权限
+        if ((user.getAuthority() & AuthorFunction.PriceFree.getCode()) != AuthorFunction.VehicleDetail.getCode()
+        && transaction.getSold_price().compareTo(price.multiply(mult)) < 0) {
             model.addAttribute("msg", "Sorry, the price does not meet the requirements.");
             return "wrongInfo";
         }

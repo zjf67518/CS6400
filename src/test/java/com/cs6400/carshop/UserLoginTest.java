@@ -21,8 +21,7 @@ public class UserLoginTest {
     void findByUserName() {
         RegularUser u = userMapper.selectByUserName("salesman_1");
         System.out.println(u.toString());
-        RegularUser user = userService.findUserByName("salesman_1");
-        System.out.println(user.toString());
+        System.out.println(userService.searchUserType("salesman_1"));
     }
 
 }

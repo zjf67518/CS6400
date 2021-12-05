@@ -70,7 +70,6 @@ public class UserService implements UserDetailsService {
     }
 
     public RegularUser findUserByName(String username) {
-        System.out.println(username);
         RegularUser user = userMapper.selectByUserName(username);
         log.info("{}", user);
         user.setAuthority(searchUserType(user.getUsername()).getCode());

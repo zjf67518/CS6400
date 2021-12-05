@@ -17,9 +17,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
-import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -87,7 +85,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler(new AuthenticationSuccessHandler() {
                     @Override
                     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-                        response.sendRedirect(request.getContextPath() + "/search");
+                        System.out.println("searchconfig");
+                        response.sendRedirect(request.getContextPath() + "/index");
                     }
                 })
                 .failureHandler(new AuthenticationFailureHandler() {
@@ -104,15 +103,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessHandler(new LogoutSuccessHandler() {
                     @Override
                     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-                        response.sendRedirect(request.getContextPath() + "/search");
+                        response.sendRedirect(request.getContextPath() + "/logout");
                     }
                 });
 
         // 授权配置
         http.authorizeRequests()
-                .antMatchers("/letter").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/admin").hasAnyAuthority("ADMIN")
+                .antMatchers("/findCustomer").hasAnyAuthority("Owner", "SalePerson", "InventoryClerk", "ServiceWriter", "Manager")
+                .antMatchers("/addCustomer").hasAnyAuthority("Owner", "SalePerson", "ServiceWriter")
+                .antMatchers("/addVehicle").hasAnyAuthority("Owner", "InventoryClerk")
+                .antMatchers("/sellVehicle").hasAnyAuthority("Owner", "SalePerson")
+                .antMatchers("/repairVehicle").hasAnyAuthority("Owner", "ServiceWriter")
+                .antMatchers("/getReport").hasAnyAuthority("Owner", "Manager")
                 .and().exceptionHandling().accessDeniedPage("/denied");
+
+        http.csrf().disable();
     }
 
 }
