@@ -1,9 +1,6 @@
 package com.cs6400.carshop.service;
 
-import com.cs6400.carshop.bean.BelowCostStatistic;
-import com.cs6400.carshop.bean.Color;
-import com.cs6400.carshop.bean.PartStatistic;
-import com.cs6400.carshop.bean.Vehicle;
+import com.cs6400.carshop.bean.*;
 import com.cs6400.carshop.mapper.ReportMapper;
 import com.cs6400.carshop.mapper.VehicleMapper;
 import com.cs6400.carshop.utils.Enum.VehicleType;
@@ -208,5 +205,14 @@ public class ReportService {
         report.put("Van", reportMapper.selectInventoryDayByVehicleType(4));
         report.put("SUV", reportMapper.selectInventoryDayByVehicleType(5));
         return report;
+    }
+
+    public ArrayList<MonthReport> searchMonthlyReport(){
+        ArrayList<MonthReport> report = reportMapper.selectMonthlyReport();
+        return report;
+    }
+
+    public MonthSalesperson searchTopSalesperson(String date){
+        return reportMapper.selectTopSalesperson(date);
     }
 }

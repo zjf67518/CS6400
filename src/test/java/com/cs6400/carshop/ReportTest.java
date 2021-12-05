@@ -73,4 +73,16 @@ public class ReportTest {
     public void testInventoryDays(){
         System.out.println(reportService.reportInventoryDays());
     }
+
+
+    @Test
+    public void testMonthReport(){
+        System.out.println(reportService.searchMonthlyReport());
+    }
+    @Test
+    public void testTopSalesperson(){
+        System.out.println(reportService.searchTopSalesperson("2021-October"));
+
+        //System.out.println(reportService.searchTopSalesperson("2021-November"));
+    }
 }
