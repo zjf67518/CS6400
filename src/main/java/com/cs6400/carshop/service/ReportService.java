@@ -1,6 +1,8 @@
 package com.cs6400.carshop.service;
 
 import com.cs6400.carshop.bean.*;
+import com.cs6400.carshop.mapper.CustomerMapper;
+import com.cs6400.carshop.mapper.RepairMapper;
 import com.cs6400.carshop.mapper.ReportMapper;
 import com.cs6400.carshop.mapper.VehicleMapper;
 import com.cs6400.carshop.utils.Enum.VehicleType;
@@ -9,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +29,10 @@ public class ReportService {
     @Autowired
     private VehicleService vehicleService;
 
+    @Autowired
+    private CustomerService customerService;
+    @Autowired
+    private RepairMapper repairMapper;
 
     public Map<String, Integer> reportByColor(int input){
         Map<String, Integer> report = initialColorReport();
@@ -218,4 +225,38 @@ public class ReportService {
     public MonthSalesperson searchTopSalesperson(String date){
         return reportMapper.selectTopSalesperson(date);
     }
+
+    public ArrayList<GrossCustomer> searchTop15Customer(){
+        ArrayList<GrossCustomer> customers = reportMapper.selectTop15Customer();
+        for(GrossCustomer customer : customers){
+            Customer customer1 = customerService.searchCustomerById(customer.getCustomer_id());
+            customer.setFirst_name(customer1.getFirst_name());
+            customer.setLast_name(customer1.getLast_name());
+            customer.setBusiness_name(customer1.getBusiness_name());
+            customer.setNumber_repairs(reportMapper.selectRepair(customer.getCustomer_id()));
+            customer.setNumber_sales(reportMapper.selectSale(customer.getCustomer_id()));
+        }
+        return customers;
+    }
+
+    public ArrayList<SaleDetail> searchSaleDetail(Long customer_id){
+        return reportMapper.selectSaleDetail(customer_id);
+    }
+
+    public ArrayList<RepairInfo> searchRepairDetail(Long customer_id){
+
+        ArrayList<RepairInfo> list = new ArrayList<>();
+        list.addAll(reportMapper.selectRepairInfoByCustomerNotDone(customer_id));
+        list.addAll(reportMapper.selectRepairInfoByCustomerDone(customer_id));
+        for(RepairInfo info: list){
+
+            info.setPart_cost(repairMapper.searchPartFee(info));
+            if (info.getPart_cost() == null) {
+                info.setPart_cost(BigDecimal.valueOf(0L));
+            }
+            info.setTotal_cost(info.getLabel_charge().add(info.getPart_cost()));
+        }
+        return list;
+    }
+
 }

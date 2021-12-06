@@ -58,4 +58,7 @@
     <select id="searchPartFee" parameterType="com.cs6400.carshop.bean.RepairInfo" resultType="BigDecimal">
         select a.part_cost from (select sum(unit_price * quantity) as part_cost, start_date, VIN from Part group by start_date, VIN) a where a.start_date = #{start_date} and a.VIN = #{VIN}
     </select>
+
+
+
 </mapper>

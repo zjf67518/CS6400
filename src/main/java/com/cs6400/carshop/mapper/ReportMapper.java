@@ -1,9 +1,6 @@
 package com.cs6400.carshop.mapper;
 
-import com.cs6400.carshop.bean.Color;
-import com.cs6400.carshop.bean.MonthReport;
-import com.cs6400.carshop.bean.MonthSalesperson;
-import com.cs6400.carshop.bean.PartStatistic;
+import com.cs6400.carshop.bean.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.ArrayList;
@@ -24,4 +21,18 @@ public interface ReportMapper {
     ArrayList<MonthReport> selectMonthlyReport();
 
     MonthSalesperson selectTopSalesperson(String date);
+
+    ArrayList<GrossCustomer> selectTop15Customer();
+
+    Integer selectRepair(Long customer_id);
+
+    Integer selectSale(Long customer_id);
+
+    ArrayList<SaleDetail> selectSaleDetail(Long customer_id);
+
+    ArrayList<String> selectVinByCustomerId(Long customer_id);
+    //查找该客户未完成的维修
+    ArrayList<RepairInfo> selectRepairInfoByCustomerNotDone(Long customer_id);
+    //查找该客户完成的维修
+    ArrayList<RepairInfo> selectRepairInfoByCustomerDone(Long customer_id);
 }

@@ -37,4 +37,72 @@
         SELECT a.first_name as first_name, a.last_name as last_name, b.total_sales as number_vehicle_sold, b.sold_income as sale_income from regularuser as a INNER JOIN (SELECT sales_person_user_name,count(*) as total_sales, sum(sold_price) as sold_income FROM transaction WHERE DATE_FORMAT(purchase_date,'%Y-%M') = #{date} group by sales_person_user_name order by count(*) desc, sum(sold_price) desc) as b on a.user_name = b.sales_person_user_name limit 1;
 
     </select>
+
+
+    <select id = "selectTop15Customer"  resultType="com.cs6400.carshop.bean.GrossCustomer">
+        select custom_id as customer_id, first_date, recent_date, total_fee as gross_income from(
+                         SELECT (ifnull(total_fee,0) + ifnull(c.sold_price, 0)) as total_fee, m.a_customer_id as custom_id ,
+                                greatest(m.a_max_start_date, ifnull(c.max_purchase_date,0)) as recent_date,
+                                least(m.a_min_start_date, ifnull(c.min_purchase_date,now())) as first_date
+                         FROM
+                             (SELECT sum(ifnull(a.label_charge,0)+ifnull(b.sum_part,0)) as total_fee, a.customer_id as a_customer_id,
+                                     max(a.start_date) as a_max_start_date,
+                                     min(a.start_date) as a_min_start_date
+                              FROM repair as a
+                                       LEFT JOIN (SELECT sum(unit_price * quantity) as sum_part, vin, start_date
+                                                  FROM part group by start_date,VIN) as b on a.VIN = b.VIN and a.start_date = b.start_date
+                              group by a_customer_id) as m
+                                 LEFT JOIN (select customer_id, sum(sold_price) as sold_price ,
+                                                   max(purchase_date) as max_purchase_date,
+                                                   min(purchase_date) as min_purchase_date
+                                            from transaction group by customer_id) as c on m.a_customer_id = c.customer_id
+                         union
+                         SELECT (ifnull(total_fee,0) + ifnull(c.sold_price, 0)) as total_fee, ifnull(m.a_customer_id, c.customer_id) as custom_id,
+                                greatest(ifnull(m.a_max_start_date,0),c.max_purchase_date) as recent_date,
+                                least(ifnull(m.a_min_start_date,now()), c.min_purchase_date) as first_date
+                         from (SELECT sum(ifnull(a.label_charge,0)+ifnull(b.sum_part,0)) as total_fee, a.customer_id as a_customer_id,
+                                      max(a.start_date) as a_max_start_date,
+                                      min(a.start_date) as a_min_start_date
+                               FROM repair as a LEFT JOIN (SELECT sum(unit_price * quantity) as sum_part, vin, start_date
+                                                           FROM part group by start_date,VIN) as b on a.VIN = b.VIN and a.start_date = b.start_date
+                               group by a_customer_id) as m
+                                  right join (SELECT customer_id, sum(sold_price) as sold_price,
+                                                     max(purchase_date) as max_purchase_date,
+                                                     min(purchase_date) as min_purchase_date
+                                              from transaction group by customer_id) as c on m.a_customer_id = c.customer_id) as t order by t.total_fee desc, t.recent_date
+            desc limit 15;
+    </select>
+
+    <select id="selectRepair" resultType="Integer">
+        select count(*) from repair where customer_id = #{customer_id}
+    </select>
+    <select id="selectSale" resultType="Integer">
+        select count(*) from Transaction where customer_id = #{customer_id}
+    </select>
+
+
+    <select id="selectSaleDetail" resultType="com.cs6400.carshop.bean.SaleDetail">
+        select t.purchase_date, t.sold_price, t.sales_person_user_name, b.VIN, b.model_year, b.model_name,b.manufacturer_name
+        from transaction as t inner join
+             (select v.model_year, v.model_name, m.manufacturer_name, VIN from vehicle as v inner join manufacturer as m on v.manufacturer_id = m.manufacturer_id) as b
+             on t.VIN = b.VIN
+        where t.customer_id = #{customer_id};
+    </select>
+
+
+    <select id="selectVinByCustomerId" resultType="String">
+        select VIN from transaction  where customer_id = #{customer_id};
+    </select>
+
+    <select id="selectRepairInfoByCustomerNotDone" parameterType="Long" resultType="com.cs6400.carshop.bean.RepairInfo">
+        select * from Repair where customer_id = #{customer_id} and complete_date is null order by start_date desc, VIN asc;
+    </select>
+
+
+    <select id="selectRepairInfoByCustomerDone" parameterType="Long" resultType="com.cs6400.carshop.bean.RepairInfo">
+        select * from Repair where customer_id = #{customer_id} and complete_date is not null order by start_date desc, complete_date desc, VIN asc;
+    </select>
+
+
+
 </mapper>

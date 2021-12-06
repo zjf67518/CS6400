@@ -85,4 +85,21 @@ public class ReportTest {
 
         //System.out.println(reportService.searchTopSalesperson("2021-November"));
     }
+
+
+    @Test
+    public void testTopCustomer(){
+        System.out.println(reportService.searchTop15Customer());
+    }
+
+    @Test
+    public void testSaleDetail(){
+        System.out.println(reportService.searchSaleDetail(1L));
+    }
+
+
+    @Test
+    public void testRepairDetail(){
+        System.out.println(reportService.searchRepairDetail(1L));
+    }
 }
