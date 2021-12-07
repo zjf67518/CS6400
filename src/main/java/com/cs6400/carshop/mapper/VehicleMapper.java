@@ -38,4 +38,9 @@ public interface VehicleMapper {
 
     List<Vehicle> searchAllVehicleByAttribute(SearchInfoConverter searchInfoConverter);
     List<Vehicle> searchSoldVehicleByAttribute(SearchInfoConverter searchInfoConverter);
+
+    //插入数据用
+    Integer selectManuIdByManuName(String manufacturer_name);
+    void insertVehicleTest(Vehicle vehicle);
+
 }

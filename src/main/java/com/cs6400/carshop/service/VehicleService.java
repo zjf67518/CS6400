@@ -160,7 +160,9 @@ public class VehicleService {
             vehicle.setPurchase_date(transaction.getPurchase_date());
             vehicle.setCustomer_id(transaction.getCustomer_id());
             vehicle.setSales_person_user_name(transaction.getSales_person_user_name());
+            System.out.println(vehicle.getSales_person_user_name());
             RegularUser user = userMapper.selectByUserName(vehicle.getSales_person_user_name());
+            System.out.println(user);
             vehicle.setSales_person_first_name(user.getFirst_name());
             vehicle.setSales_person_last_name(user.getLast_name());
             Customer customer = customerService.searchCustomerById(transaction.getCustomer_id());

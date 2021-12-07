@@ -35,4 +35,7 @@ public interface ReportMapper {
     ArrayList<RepairInfo> selectRepairInfoByCustomerNotDone(Long customer_id);
     //查找该客户完成的维修
     ArrayList<RepairInfo> selectRepairInfoByCustomerDone(Long customer_id);
+
+
+
 }

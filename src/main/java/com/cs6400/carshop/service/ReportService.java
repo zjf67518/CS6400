@@ -146,6 +146,7 @@ public class ReportService {
         report.put("Green", 0);
         report.put("Maroon", 0);
         report.put("Metallic", 0);
+        report.put("Navy", 0);
         report.put("Orange", 0);
         report.put("Pink", 0);
         report.put("Purple", 0);

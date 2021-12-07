@@ -21,7 +21,7 @@
     </select>
 
     <select id="selectInventoryDayByVehicleType" resultType="Double">
-        SELECT avg(datediff(v.added_date, t.purchase_date))
+        SELECT avg(datediff( t.purchase_date, v.added_date))
         FROM transaction as t
                  INNER JOIN vehicle as v
                             on t.VIN = v.VIN where v.vehicle_type = #{vehicle_type}
@@ -30,7 +30,7 @@
 
 
     <select id="selectMonthlyReport" resultType="com.cs6400.carshop.bean.MonthReport">
-        SELECT DATE_FORMAT(t.purchase_date,'%Y-%M') as time, sum(t.sold_price) - sum(v.invoice_price) as net_income, sum(t.sold_price) as sale_income, count(*) as number_vehicle_sold, concat(TRUNCATE(sum(t.sold_price)/sum(v.invoice_price) * 100,3),'%') as ratio FROM transaction as t INNER JOIN vehicle as v on t.VIN = v.VIN group by time order by time;
+        SELECT DATE_FORMAT(t.purchase_date,'%Y-%M') as time, sum(t.sold_price) - sum(v.invoice_price) as net_income, sum(t.sold_price) as sale_income, count(*) as number_vehicle_sold, concat(TRUNCATE(sum(t.sold_price)/sum(v.invoice_price) * 100,3),'%') as ratio FROM transaction as t INNER JOIN vehicle as v on t.VIN = v.VIN group by time order by time desc;
     </select>
 
     <select id = "selectTopSalesperson" resultType="com.cs6400.carshop.bean.MonthSalesperson">

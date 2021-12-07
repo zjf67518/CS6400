@@ -81,7 +81,7 @@ public class ReportTest {
     }
     @Test
     public void testTopSalesperson(){
-        System.out.println(reportService.searchTopSalesperson("2021-October"));
+        System.out.println(reportService.searchTopSalesperson("2021-March"));
 
         //System.out.println(reportService.searchTopSalesperson("2021-November"));
     }
@@ -94,12 +94,12 @@ public class ReportTest {
 
     @Test
     public void testSaleDetail(){
-        System.out.println(reportService.searchSaleDetail(1L));
+        System.out.println(reportService.searchSaleDetail(151L));
     }
 
 
     @Test
     public void testRepairDetail(){
-        System.out.println(reportService.searchRepairDetail(1L));
+        System.out.println(reportService.searchRepairDetail(151L));
     }
 }

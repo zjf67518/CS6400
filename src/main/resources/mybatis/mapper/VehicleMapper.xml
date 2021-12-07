@@ -226,4 +226,18 @@ vehicle_type) values(#{VIN}, #{manufacturer_id}, #{invoice_price}, #{model_name}
             </if>
         </if>
     </select>
+
+
+    <select id="selectManuIdByManuName" parameterType="String" resultType="Integer">
+        select manufacturer_id from manufacturer where manufacturer_name = #{manufacturer_name}
+    </select>
+
+
+
+
+    <insert id="insertVehicleTest" parameterType="com.cs6400.carshop.bean.Vehicle" >
+        insert into vehicle (VIN, manufacturer_id, invoice_price, model_name, model_year, description, added_date, inventory_clerk_user_name,
+                             vehicle_type) values(#{VIN}, #{manufacturer_id}, #{invoice_price}, #{model_name}, #{model_year}, #{description}, #{added_date}, #{inventory_clerk_user_name},
+                                                  #{vehicle_type})
+    </insert>
 </mapper>

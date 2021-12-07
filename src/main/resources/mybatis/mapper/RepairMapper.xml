@@ -59,6 +59,11 @@
         select a.part_cost from (select sum(unit_price * quantity) as part_cost, start_date, VIN from Part group by start_date, VIN) a where a.start_date = #{start_date} and a.VIN = #{VIN}
     </select>
 
+    <insert id="insertRepairTest" parameterType="com.cs6400.carshop.bean.Repair" >
+        insert into Repair (start_date, VIN, odometer_reading, customer_id, service_writer_user_name, description, complete_date, label_charge )
+        values(#{start_date}, #{VIN}, #{odometer_reading}, #{customer_id}, #{service_writer_user_name}, #{description}, #{complete_date}, #{label_charge})
+    </insert>
+
 
 
 </mapper>

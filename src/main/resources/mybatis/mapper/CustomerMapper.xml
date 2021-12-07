@@ -33,4 +33,31 @@
         where customer.customer_id = #{customer_id}
     </select>
 
+
+
+    <insert id="insertUser" parameterType="com.cs6400.carshop.bean.RegularUser">
+        insert into regularuser (user_name, first_name, last_name, password) values(#{username}, #{first_name}, #{last_name}, #{password})
+    </insert>
+
+    <insert id="insertInventoryClerk" parameterType="String">
+        insert into InventoryClerk (user_name) values(#{user_name})
+    </insert>
+    <insert id="insertManager" parameterType="String">
+        insert into Manager (user_name) values(#{user_name})
+    </insert>
+    <insert id="insertSalePerson" parameterType="String">
+        insert into saleperson (user_name) values(#{user_name})
+    </insert>
+    <insert id="insertWriter" parameterType="String">
+        insert into servicewriter (user_name) values(#{user_name})
+    </insert>
+
+
+    <select id="searchCustomerIdByIndividual" parameterType="String" resultType="Long">
+        select customer_id from individual where driver_license = #{driving};
+    </select>
+
+    <select id="searchCustomerIdByBusiness" parameterType="String" resultType="Long">
+        select customer_id from business where tax_id = #{tax_id}
+    </select>
 </mapper>

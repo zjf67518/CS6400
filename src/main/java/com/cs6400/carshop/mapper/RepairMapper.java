@@ -28,5 +28,8 @@ public interface RepairMapper {
     BigDecimal searchPartFee(RepairInfo repairInfo);
 
 
+    void insertRepairTest(Repair repair);
+
+
 
 }
