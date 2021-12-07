@@ -16,4 +16,5 @@ public class MonthReport {
     private BigDecimal sale_income;
     private Integer number_vehicle_sold;
     private String ratio;
+    private MonthSalesperson monthSalesperson;
 }

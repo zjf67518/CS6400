@@ -227,6 +227,15 @@ public class ReportService {
         return reportMapper.selectTopSalesperson(date);
     }
 
+    public ArrayList<MonthReport> searchDrillDownReport(){
+        ArrayList<MonthReport> report = reportMapper.selectMonthlyReport();
+        for (MonthReport r : report) {
+            r.setMonthSalesperson(reportMapper.selectTopSalesperson(r.getTime()));
+        }
+        System.out.println(report);
+        return report;
+    }
+
     public ArrayList<GrossCustomer> searchTop15Customer(){
         ArrayList<GrossCustomer> customers = reportMapper.selectTop15Customer();
         for(GrossCustomer customer : customers){

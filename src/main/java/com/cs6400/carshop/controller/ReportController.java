@@ -1,13 +1,19 @@
 package com.cs6400.carshop.controller;
 
 
+import com.cs6400.carshop.bean.*;
 import com.cs6400.carshop.service.ReportService;
+import com.cs6400.carshop.utils.Enum.AuthorFunction;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Map;
 
 @Slf4j
@@ -43,45 +49,59 @@ public class ReportController {
         return report;
     }
 
-    @ResponseBody
     @GetMapping("/grossCustomerIncome")
-    public Map<String,Integer> grossCustomerIncome(int input){
-        return null;
+    public String grossCustomerIncome(Model model){
+        ArrayList<GrossCustomer> res = reportService.searchTop15Customer();
+        model.addAttribute("GrossCustomer", res);
+        return "customerIncome";
     }
 
-    @ResponseBody
-    @GetMapping("/repairByType")
-    public Map<String,Integer> repairByType(int input){
-        return null;
+    @GetMapping("/customerDetail/{customer_id}")
+    public String selectedCustomer(@PathVariable("customer_id") Long customer_id, Model model){
+        ArrayList<SaleDetail> saleDetails = reportService.searchSaleDetail(customer_id);
+        ArrayList<RepairInfo> repairInfos = reportService.searchRepairDetail(customer_id);
+        model.addAttribute("SaleDetail", saleDetails);
+        model.addAttribute("RepairInfo", repairInfos);
+        return "selectedCustomer";
     }
 
-    @ResponseBody
-    @GetMapping("/repairByModel")
-    public Map<String,Integer> repairByModel(int input){
-        return null;
-    }
+//    @ResponseBody
+//    @GetMapping("/repairByType")
+//    public Map<String,Integer> repairByType(int input){
+//        return null;
+//    }
+//
+//    @ResponseBody
+//    @GetMapping("/repairByModel")
+//    public Map<String,Integer> repairByModel(int input){
+//        return null;
+//    }
 
-    @ResponseBody
     @GetMapping("/belowCostSales")
-    public Map<String,Integer> belowCostSales(int input){
-        return null;
+    public String belowCostSales(Model model){
+        ArrayList<BelowCostStatistic> res = reportService.reportBelowCostSales();
+        model.addAttribute("BelowCostStatistic", res);
+        return "belowCostSales";
     }
 
     @ResponseBody
     @GetMapping("/averageTimeInInventory")
-    public Map<String,Integer> averageTimeInInventory(int input){
-        return null;
+    public Map<String, Double> averageTimeInInventory(){
+        Map<String, Double> res = reportService.reportInventoryDays();
+        return res;
     }
 
     @ResponseBody
     @GetMapping("/partsStatistics")
-    public Map<String,Integer> partsStatistics(int input){
-        return null;
+    public ArrayList<PartStatistic> partsStatistics(){
+        ArrayList<PartStatistic> res = reportService.reportByPart();
+        return res;
     }
 
-    @ResponseBody
     @GetMapping("/monthlySales")
-    public Map<String,Integer> monthlySales(int input){
-        return null;
+    public String monthlySales(Model model){
+        ArrayList<MonthReport> res = reportService.searchDrillDownReport();
+        model.addAttribute("MonthReport", res);
+        return "monthlySales";
     }
 }

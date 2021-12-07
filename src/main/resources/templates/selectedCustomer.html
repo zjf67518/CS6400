@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="ThemeBucket">
+    <link rel="shortcut icon" href="#" type="image/png">
+
+    <title>selected customer</title>
+
+    <!--dynamic table-->
+    <link th:href="@{/js/advanced-datatable/css/demo_page.css}" rel="stylesheet"/>
+    <link th:href="@{/js/advanced-datatable/css/demo_table.css}" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/js/data-tables/DT_bootstrap.css}"/>
+
+    <!--    <div th:include="common :: commonheader"></div>-->
+</head>
+
+<body class="sticky-header">
+
+<section>
+
+    <!--    <div th:replace="common :: #leftmenu"></div>-->
+    <!-- main content start-->
+    <div class="main-content">
+
+        <!--        <div th:replace="common :: headermenu"></div>-->
+
+        <!-- page heading start-->
+        <div class="page-heading">
+            <h3>
+                vehicle sales
+            </h3>
+        </div>
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <span class="tools pull-right">
+                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                <a href="javascript:;" class="fa fa-times"></a>
+             </span>
+                        </header>
+                        <div class="panel-body">
+                            <div class="adv-table">
+                                <table class="display table table-bordered table-striped" id="dynamic-table">
+                                    <thead>
+                                    <tr>
+                                        <th>purchase_date</th>
+                                        <th>sold_price</th>
+                                        <th>sales_person_user_name</th>
+                                        <th>model_name</th>
+                                        <th>model_year</th>
+                                        <th>manufacturer_name</th>
+                                        <th>vin</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    <tr class="gradeX" th:each="detail: ${SaleDetail}">
+                                        <td th:text="${detail.purchase_date}"></td>
+                                        <td th:text="${detail.sold_price}"></td>
+                                        <td th:text="${detail.sales_person_user_name}"></td>
+                                        <td th:text="${detail.model_name}"></td>
+                                        <td th:text="${detail.model_year}"></td>
+                                        <td th:text="${detail.manufacturer_name}"></td>
+                                        <td th:text="${detail.VIN}"></td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="dataTables_info" id="dynamic-table_info">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <!-- main content end-->
+</section>
+
+<section>
+
+    <!--    <div th:replace="common :: #leftmenu"></div>-->
+    <!-- main content start-->
+    <div class="main-content">
+
+        <!--        <div th:replace="common :: headermenu"></div>-->
+
+        <!-- page heading start-->
+        <div class="page-heading">
+            <h3>
+                repairs
+            </h3>
+        </div>
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <span class="tools pull-right">
+                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                <a href="javascript:;" class="fa fa-times"></a>
+             </span>
+                        </header>
+                        <div class="panel-body">
+                            <div class="adv-table">
+                                <table class="display table table-bordered table-striped" id="dynamic-table">
+                                    <thead>
+                                    <tr>
+                                        <th>start_date</th>
+                                        <th>complete_date</th>
+                                        <th>customer_id</th>
+                                        <th>service_writer_user_name</th>
+                                        <th>label_charge</th>
+                                        <th>part_cost</th>
+                                        <th>total_cost</th>
+                                        <th>vin</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    <tr class="gradeX" th:each="Info: ${RepairInfo}">
+                                        <td th:text="${Info.start_date}"></td>
+                                        <td th:text="${Info.complete_date}"></td>
+                                        <td th:text="${Info.customer_id}"></td>
+                                        <td th:text="${Info.service_writer_user_name}"></td>
+                                        <td th:text="${Info.label_charge}"></td>
+                                        <td th:text="${Info.part_cost}"></td>
+                                        <td th:text="${Info.total_cost}"></td>
+                                        <td th:text="${Info.VIN}"></td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="dataTables_info" id="dynamic-table_info">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <form action="/getReport" method="get">
+            <input type="submit" value="return"/>
+        </form>
+        <!-- main content end-->
+</section>
+
+<div th:replace="common :: #commonscript"></div>
+<!--dynamic table-->
+<script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
+<!--dynamic table initialization -->
+<!--<script src="js/dynamic_table_init.js"></script>-->
+
+
+</body>
+</html>
