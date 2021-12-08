@@ -30,12 +30,23 @@
 
 
     <select id="selectMonthlyReport" resultType="com.cs6400.carshop.bean.MonthReport">
-        SELECT DATE_FORMAT(t.purchase_date,'%Y-%M') as time, sum(t.sold_price) - sum(v.invoice_price) as net_income, sum(t.sold_price) as sale_income, count(*) as number_vehicle_sold, concat(TRUNCATE(sum(t.sold_price)/sum(v.invoice_price) * 100,3),'%') as ratio FROM transaction as t INNER JOIN vehicle as v on t.VIN = v.VIN group by time order by time desc;
+        SELECT DATE_FORMAT(t.purchase_date,'%Y-%m') as time,
+        sum(t.sold_price) - sum(v.invoice_price) as net_income,
+        sum(t.sold_price) as sale_income,
+        count(*) as number_vehicle_sold,
+        concat(TRUNCATE(sum(t.sold_price)/sum(v.invoice_price) * 100,3),'%') as ratio
+        FROM transaction as t INNER JOIN vehicle as v on t.VIN = v.VIN group by time order by time desc;
     </select>
 
     <select id = "selectTopSalesperson" resultType="com.cs6400.carshop.bean.MonthSalesperson">
-        SELECT a.first_name as first_name, a.last_name as last_name, b.total_sales as number_vehicle_sold, b.sold_income as sale_income from regularuser as a INNER JOIN (SELECT sales_person_user_name,count(*) as total_sales, sum(sold_price) as sold_income FROM transaction WHERE DATE_FORMAT(purchase_date,'%Y-%M') = #{date} group by sales_person_user_name order by count(*) desc, sum(sold_price) desc) as b on a.user_name = b.sales_person_user_name limit 1;
-
+        select * from(
+                         SELECT a.first_name as first_name, a.last_name as last_name,
+                                b.total_sales as number_vehicle_sold, b.sold_income as sale_income
+                         from regularuser as a
+                                  INNER JOIN (SELECT sales_person_user_name,count(*) as total_sales, sum(sold_price) as sold_income
+                                              FROM transaction WHERE DATE_FORMAT(purchase_date,'%Y-%m') = #{date}
+                                              group by sales_person_user_name order by count(*) desc, sum(sold_price) desc) as b
+                                             on a.user_name = b.sales_person_user_name )as c order by c.sale_income desc limit 1;
     </select>
 
 
