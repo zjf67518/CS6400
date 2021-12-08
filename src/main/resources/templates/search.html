@@ -141,7 +141,7 @@
         </select>
         <input type="radio" name="desc" value="True">desc
         <input type="radio" name="desc" value="False">asc<br/>
-        <li th:if="${session.loginUser!=null}">
+        <li th:if="${session.loginUser != null && session.loginUser.Authority >= 98}">
             filter by: <select name="filterBy">
             <option value=0 selected>unsold</option>
             <option value=1>sold</option>
