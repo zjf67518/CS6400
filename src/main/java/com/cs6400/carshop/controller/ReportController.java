@@ -104,4 +104,9 @@ public class ReportController {
         model.addAttribute("MonthReport", res);
         return "monthlySales";
     }
+
+    private void ttt() {
+        System.out.println(123);
+        System.out.println(321);
+    }
 }
