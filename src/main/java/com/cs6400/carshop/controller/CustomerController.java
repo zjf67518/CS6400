@@ -54,4 +54,8 @@ public class CustomerController {
         }
         return "redirect:/search";
     }
+
+    private void tttt() {
+        System.out.println(4321);
+    }
 }
