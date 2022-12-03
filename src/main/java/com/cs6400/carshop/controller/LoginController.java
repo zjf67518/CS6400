@@ -80,4 +80,8 @@ public class LoginController {
     public String getDeniedPage() {
         return "/error/4xx";
     }
+
+    private void tttt() {
+        System.out.println(4321);
+    }
 }
